@@ -1,0 +1,38 @@
+.app-wrapper{
+  margin: 0 auto;
+  width: 1200px;
+  display: grid;
+
+  grid-template-areas: "h h" "s m" "f f";
+  grid-template-rows: 60px 1fr 60px;
+  grid-template-columns: 2fr 10fr;
+
+}
+
+.header{
+  grid-area: h;
+  background-color: green;
+}
+
+.header img{
+  width: 60px;
+}
+
+.siteBar{
+  grid-area: s;
+  background-color: greenyellow;
+}
+
+.main{
+  grid-area: m;
+  background-color: gold;
+}
+
+.main img{
+  width: 200px;
+}
+
+.footer{
+  grid-area: f;
+  background-color: red;
+}
