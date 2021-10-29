@@ -8,31 +8,3 @@
   grid-template-columns: 2fr 10fr;
 
 }
-
-.header{
-  grid-area: h;
-  background-color: green;
-}
-
-.header img{
-  width: 60px;
-}
-
-.siteBar{
-  grid-area: s;
-  background-color: greenyellow;
-}
-
-.main{
-  grid-area: m;
-  background-color: gold;
-}
-
-.main img{
-  width: 200px;
-}
-
-.footer{
-  grid-area: f;
-  background-color: red;
-}

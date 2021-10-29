@@ -1,0 +1,8 @@
+.main{
+    grid-area: m;
+    background-color: gold;
+  }
+  
+  .main img{
+    width: 200px;
+  }
