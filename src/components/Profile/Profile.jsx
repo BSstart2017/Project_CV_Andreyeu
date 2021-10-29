@@ -1,24 +1,17 @@
 import React from "react";
-import style from "./Profile.module";
+import MyPosts from "./MyPosts/MyPosts";
+import style from "./Profile.module.css";
 
 const Profile = () => {
     return (
-      <div className={style.main}>
+      <div>
         <div>
           <img src="https://www.korcula-larus.com/wp-content/uploads/2018/06/holiday-house-korcula-more-beach-06.jpg" alt='df' />
         </div>
         <div>
-          <img src="https://klike.net/uploads/posts/2019-03/1551511784_4.jpg" alt='df' />
           <h2>description</h2>
         </div>
-        <div>
-          my post
-          <div>
-            new post
-            <div>post 1</div>
-            <div>post 2</div>
-          </div>
-        </div>
+        <MyPosts />
       </div>
     );
   }

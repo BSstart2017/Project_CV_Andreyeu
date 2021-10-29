@@ -1,14 +1,15 @@
 import React from "react";
-import style from "./NavBar.module";
+import { NavLink } from "react-router-dom";
+import style from "./NavBar.module.css";
 
 const SiteBar = () => {
     return (
       <div className={style.siteBar}>
         <div>
-          <a href="#">Profile</a>
+          <NavLink to="/profile" activeClassName={style.active}>Profile</NavLink>
         </div>
         <div>
-          <a href="#">Messages</a>
+          <NavLink to="/dialogs" activeClassName={style.active}>Dialogs</NavLink>
         </div>
         <div>
           <a href="#">News</a>

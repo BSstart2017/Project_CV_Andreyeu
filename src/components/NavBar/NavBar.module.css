@@ -2,4 +2,11 @@
     grid-area: s;
     background-color: greenyellow;
   }
-  
+
+a {
+    color: white;
+  }
+
+.siteBar a.active{
+  color: gold;
+}
