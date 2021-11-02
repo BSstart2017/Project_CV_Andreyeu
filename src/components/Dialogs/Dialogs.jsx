@@ -1,23 +1,28 @@
 import React from "react";
-import style from "./Dialogs.module.css"
+import { newMessageTextAC, sendMessageAC } from "../../redux/dialogs-reducer";
+import DialogItem from "./DialogItems/DialogItems";
+import style from "./Dialogs.module.css";
+import Message from "./Messages/Message";
 
-const Dialogs = () => {
-    return (
-    <div className={style.dialogs}> 
+const Dialogs = (props) => {
+  let dialogElement = props.state.dialogData.map( el => <DialogItem name={el.name} id={el.id}/>)
+  let messageElement = props.state.messagesData.map( el => <Message message={el.message} id={el.id}/>)
+
+  const addMessage = () => props.dispatch(sendMessageAC())
+  const newMessageBody = event => props.dispatch(newMessageTextAC(event.target.value))
+
+  return (
+    <div className={style.dialogs}>
       <div className={style.dialogItems}>
-        <div className={style.dialog + ' ' + style.active}> Dima </div>
-        <div className={style.dialog}> Serg </div>
-        <div className={style.dialog}> Palina </div>
-        <div className={style.dialog}> Alisa</div>
-        <div className={style.dialog}> Andrei </div>
+        {dialogElement}
       </div>
       <div className={style.messages}>
-        <div className={style.message}>Hi</div>
-        <div className={style.message}>My name</div>
-        <div className={style.message}>Hello my friend</div>
+        <div>{messageElement}</div>
+        <div><textarea placeholder="Please write new message!" onChange={newMessageBody} value={props.state.newMessageText} /></div>
+        <div><button onClick={addMessage}>Send message</button></div>
       </div>
     </div>
-    )
-  }
+  );
+};
 
-  export default Dialogs
+export default Dialogs;

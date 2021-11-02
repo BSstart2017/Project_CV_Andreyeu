@@ -7,14 +7,6 @@
     padding: 10px;
 }
 
-.dialog.active{
-    color: green;
-}
-
 .messages{
     padding: 10px;
-}
-
-.message{
-    color: hotpinks;
 }
