@@ -17,12 +17,14 @@ const profileReducer = (state = defaultState, action) => {
       let newItemPost = {
         id: 5, newText: state.newTextPost, col: 0
       }
-      state.postData.unshift(newItemPost)
-      state.newTextPost = ''
-      return state
+      return {...state,
+        postData: [newItemPost , ...state.postData],
+        newTextPost: ''
+      }
     case NEW_TEXT_POST:
-      state.newTextPost = action.newText
-      return state
+      return {...state,
+        newTextPost: action.newText
+      }
     default:
       return state
   }

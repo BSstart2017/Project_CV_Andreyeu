@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { NavLink } from "react-router-dom";
 import style from "./NavBar.module.css";
@@ -16,13 +17,18 @@ const SiteBar = () => {
         </NavLink>
       </div>
       <div>
-        <a href="#">News</a>
+        <NavLink to="/users" activeClassName={style.active}>
+          Users
+        </NavLink>
       </div>
       <div>
-        <a href="#">Music</a>
+        <a href="">News</a>
       </div>
       <div>
-        <a href="#">Settings</a>
+        <a href="">Music</a>
+      </div>
+      <div>
+        <a href="">Settings</a>
       </div>
     </div>
   );

@@ -1,0 +1,24 @@
+.container{
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+}
+
+.leftBlock{
+  padding: 10px;
+}
+
+.rightBlock{
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 5fr 5fr;
+}
+
+.activeStyle{
+  color: red;
+}
+
+.photoAva{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
