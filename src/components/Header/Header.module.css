@@ -6,3 +6,11 @@
   .header img{
     width: 60px;
   }
+
+  .rightBlock{
+    float: right;
+  }
+
+  .rightBlock a{
+    color: white;
+  }

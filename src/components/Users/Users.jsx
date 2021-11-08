@@ -1,6 +1,7 @@
 import React from "react";
 import style from "./Users.module.css";
 import userDefaultIg from './../../assets/images/userDefault.jpg';
+import { NavLink } from "react-router-dom";
 
 const Users = (props) => {
 
@@ -16,7 +17,7 @@ const Users = (props) => {
             <div>
             { 
               pages.map(p=> {
-                return <span className={Number(props.activePage) === p && style.activeStyle} 
+                return <span className={props.activePage === p && style.activeStyle} 
                 onClick={()=>{props.setCurrentPage(p)}}>{p}</span>
               } )
             }
@@ -24,9 +25,20 @@ const Users = (props) => {
             
             {props.users.map(el => <div className={style.container} key={el.id}>
                 <div className={style.leftBlock}>
+                  <NavLink to={'profile/'+ el.id}>
                   <img className={style.photoAva} src={el.photos.small != null ? el.photos.small : userDefaultIg} alt="noPhoto" />
-                  {el.followed ? <button onClick={() => {props.unfollow(el.id)}}>Follow</button>
-                  : <button onClick={() => {props.follow(el.id)}}>Unfollow</button>}
+                  </NavLink>
+                  {el.followed ? <button disabled={props.isToggleFollow.some(id => id === el.id)} onClick={() => 
+                    { 
+                      props.toggleUnFollow(el.id)
+                    }
+                }>Unfollow</button>
+                  : <button disabled={props.isToggleFollow.some(id => id === el.id)} onClick={() =>
+                    {
+                     props.toggleFollow(el.id)
+                    }
+                   
+                   }>Follow</button>}
                 </div>
                 <div className={style.rightBlock}>
                   <div>
