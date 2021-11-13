@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./MyPosts.module.css";
+import MyPostsReduxForm from "./MyPostsForm";
 import Post from "./Post/Post";
 
 const MyPosts = (props) => {
@@ -7,19 +8,15 @@ const MyPosts = (props) => {
   let postElement = props.postData.map((el) => (
     <Post newText={el.newText} col={el.col} key={el.id}/>
   ));
-  
-  const onAddPost = () => props.addPost();
-  const onChangePostText = (event) => props.postTextChange(event.target.value);
+
+  const onSubmit = (formData) => {
+    props.addPost(formData.newTextBody);
+  };
 
   return (
     <div className={style.myPostBlock}>
       <h3> My post </h3>
-      <div>
-        <textarea value={props.newTextPost} onChange={onChangePostText} />
-      </div>
-      <div>
-        <button onClick={onAddPost}>Add new Post</button>
-      </div>
+      <MyPostsReduxForm onSubmit={onSubmit}/>
         {postElement}
     </div>
   );

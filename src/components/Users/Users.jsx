@@ -14,7 +14,7 @@ const Users = (props) => {
         
         return (
           <div>
-            <div>
+            <div className={style.blockPagimation}>
             { 
               pages.map(p=> {
                 return <span className={props.activePage === p && style.activeStyle} 

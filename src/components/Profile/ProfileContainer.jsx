@@ -1,8 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import Profile from "./Profile";
-import {getProfileUser} from "./../../redux/profile-reducer";
+import {getProfileUser, getProfileStatus, getAddProfileStatus} from "./../../redux/profile-reducer";
 import { withRouter } from "react-router";
+import { compose } from "redux";
 
 class ProfileContainer extends React.Component {
   
@@ -12,12 +13,13 @@ class ProfileContainer extends React.Component {
       userId = this.props.myId
     }
     this.props.getProfileUser(userId)
+    this.props.getProfileStatus(userId)
    } 
   
   render() {
     return (
       <>
-      <Profile {...this.props}  profile={this.props.profile} />
+      <Profile {...this.props} profile={this.props.profile} status={this.props.status} getAddProfileStatus={this.props.getAddProfileStatus}/>
       </>
     );
   }
@@ -25,9 +27,9 @@ class ProfileContainer extends React.Component {
 
 let mapPropsToState = (state) => ({
   profile: state.profileReducer.profile,
-  myId: state.authReducer.id
+  myId: state.authReducer.id,
+  status: state.profileReducer.status
 })
 
-let witchRouterProfile = withRouter(ProfileContainer)
-
-export default connect(mapPropsToState, {getProfileUser})(witchRouterProfile);
+export default compose(connect(mapPropsToState, {getProfileUser, getProfileStatus,getAddProfileStatus}), 
+withRouter)(ProfileContainer)

@@ -1,24 +1,16 @@
 import React from "react";
 import style from "./ProfileInfo.module.css";
-import Preloader from "./../../commons/Preloader/Preloader";
+import ProfileStatus from "./ProfileStatus/ProfileStatus.jsx"
 
 const ProfileInfo = (props) => {
-  if(!props.profile){
-    return <Preloader />
-  }
     return (
       <div>
-        <div>
-          <img src="https://www.korcula-larus.com/wp-content/uploads/2018/06/holiday-house-korcula-more-beach-06.jpg" alt='noPhoto' />
-        </div>
-        <div>
+        {props.profile===null ? <></> : <><div>
           <img src={props.profile.photos.large} alt='noPhoto' />
         </div>
-        <div className={style.profileInfoBlock}>
-          <h2>description</h2>
-        </div>
+          <ProfileStatus statusText={props.status} getAddProfileStatus={props.getAddProfileStatus}/></>}
       </div>
-    );
+    )
   }
 
 export default ProfileInfo 

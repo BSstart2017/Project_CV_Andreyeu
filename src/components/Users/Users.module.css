@@ -3,6 +3,10 @@
   grid-template-columns: 2fr 10fr;
 }
 
+.blockPagimation{
+  max-width: 800px;
+}
+
 .leftBlock{
   padding: 10px;
 }
