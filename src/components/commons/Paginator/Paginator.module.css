@@ -5,3 +5,7 @@
 .activeStyle{
     color: red;
   }
+
+.blockPaginator span{
+  padding: 5px;
+}

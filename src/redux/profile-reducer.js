@@ -3,6 +3,7 @@ import { userAPI } from "../api/api"
 const ADD_POST = "profile/Aliaksandr_Andreyeu/ADD-POST"
 const SET_PROFILE_USER = "profile/Aliaksandr_Andreyeu/SET_PROFILE_USER"
 const SET_PROFILE_STATUS = "profile/Aliaksandr_Andreyeu/SET_PROFILE_STATUS"
+const SET_NEW_AVATAR_SUCCESS = "SET_NEW_AVATAR_SUCCESS"
 
 let defaultState = {
   postData: [
@@ -26,6 +27,8 @@ const profileReducer = (state = defaultState, action) => {
       return { ...state, profile: action.profile }
     case SET_PROFILE_STATUS:
       return { ...state, status: action.status }
+    case SET_NEW_AVATAR_SUCCESS:
+      return { ...state, profile: {...state.profile, photos: action.photos} }
     default:
       return state
   }
@@ -34,6 +37,7 @@ const profileReducer = (state = defaultState, action) => {
 export const addPost = (newTextBody) => ({type : ADD_POST, newTextBody})
 export const setProfileUser = (profile) => ({type : SET_PROFILE_USER, profile})
 export const setProfileStatus = (status) => ({type : SET_PROFILE_STATUS, status})
+export const setNewAvatarSuccess = (photos) => ({type : SET_NEW_AVATAR_SUCCESS, photos})
 
 export const getProfileUser = (userId) => async (dispatch) => {
   const response = await userAPI.profileUser(userId)
@@ -49,6 +53,13 @@ export const getAddProfileStatus = (status) => async (dispatch) => {
   const response = await userAPI.addProfileStatus(status)
     if(response.resultCode === 0){
       dispatch(setProfileStatus(status))
+    }
+}
+
+export const getNewAvatar = (photos) => async (dispatch) => {
+  const response = await userAPI.addNewAvatar(photos)
+    if(response.resultCode === 0){
+      dispatch(setNewAvatarSuccess(response.data.photos))
     }
 }
 

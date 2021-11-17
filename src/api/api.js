@@ -36,5 +36,13 @@ export const userAPI = {
     logout(){  
         return instance.delete(`auth/login/`).then(response=>response.data)
     },
+    addNewAvatar(photos){  
+        const formData = new FormData();
+        formData.append("image", photos);
+        return instance.put(`profile/photo`, formData , {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }}).then(response=>response.data)
+    }
 
 }

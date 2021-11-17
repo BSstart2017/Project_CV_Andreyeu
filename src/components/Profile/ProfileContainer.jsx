@@ -1,11 +1,11 @@
 import React, {useEffect} from "react";
 import { connect } from "react-redux";
 import Profile from "./Profile";
-import {getProfileUser, getProfileStatus, getAddProfileStatus} from "./../../redux/profile-reducer";
+import {getProfileUser, getProfileStatus, getNewAvatar, getAddProfileStatus} from "./../../redux/profile-reducer";
 import { withRouter } from "react-router";
 import { compose } from "redux";
 
-const ProfileContainer = ({match, myId, history, getProfileUser, getProfileStatus, profile, status, getAddProfileStatus }) => {
+const ProfileContainer = ({getNewAvatar, match, myId, history, getProfileUser, getProfileStatus, profile, status, getAddProfileStatus }) => {
   
   useEffect(() => {
     let userId = match.params.userId
@@ -17,12 +17,11 @@ const ProfileContainer = ({match, myId, history, getProfileUser, getProfileStatu
     }
     getProfileUser(userId)
     getProfileStatus(userId)
-}, [match.params.userId, myId])
-
+},[match.params.userId])
 
     return (
       <>
-      <Profile profile={profile} status={status}
+      <Profile isOwner={!match.params.userId} getNewAvatar={getNewAvatar} profile={profile} status={status}
        getAddProfileStatus={getAddProfileStatus}/>
       </>
     );
@@ -34,5 +33,5 @@ let mapPropsToState = (state) => ({
   status: state.profileReducer.status
 })
 
-export default compose(connect(mapPropsToState, {getProfileUser, getProfileStatus,getAddProfileStatus}), 
+export default compose(connect(mapPropsToState, {getProfileUser, getNewAvatar, getProfileStatus,getAddProfileStatus}), 
 withRouter)(ProfileContainer)

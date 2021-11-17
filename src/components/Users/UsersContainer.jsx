@@ -8,12 +8,12 @@ import {toggleUnFollow, getUsers, toggleFollow } from "../../redux/users-reducer
 import Preloader from "./../commons/Preloader/Preloader";
 import Users from './Users';
 
-const UsersContainer = ({getUsers,pageCount, activePage, isPreloader, totalUsers, users, isToggleFollow, isLogin,
+const UsersContainer = ({getUsers, pageCount, activePage, isPreloader, totalUsers, users, isToggleFollow, isLogin,
   toggleFollow, toggleUnFollow }) => {
 
-  useEffect(() => {
-    getUsers(activePage, pageCount)
-})
+    useEffect(() => {
+      getUsers(activePage, pageCount)
+  },[activePage,pageCount])
 
   const setCurrentPage = (page) => {
     getUsers(page, pageCount)
