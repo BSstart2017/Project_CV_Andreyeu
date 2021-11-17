@@ -1,8 +1,6 @@
 import React from "react";
 import imgPreloader from "./../../../assets/images/preloader.png"
 
-
-
 const Preloader = () => {
     return (
         <div>
@@ -10,6 +8,5 @@ const Preloader = () => {
         </div>
     )
 }
-
 
 export default Preloader

@@ -1,14 +1,13 @@
 import React from "react";
-import style from "./ProfileInfo.module.css";
-import ProfileStatus from "./ProfileStatus/ProfileStatus.jsx"
+import ProfileStatus from "./ProfileStatus/ProfileStatus"
 
-const ProfileInfo = (props) => {
+const ProfileInfo = ({profile, status, getAddProfileStatus}) => {
     return (
       <div>
-        {props.profile===null ? <></> : <><div>
-          <img src={props.profile.photos.large} alt='noPhoto' />
+        {profile===null ? <></> : <><div>
+          <img src={profile.photos.large} alt='noPhoto' />
         </div>
-          <ProfileStatus statusText={props.status} getAddProfileStatus={props.getAddProfileStatus}/></>}
+          <ProfileStatus statusText={status} getAddProfileStatus={getAddProfileStatus}/></>}
       </div>
     )
   }

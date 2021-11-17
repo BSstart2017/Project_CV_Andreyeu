@@ -22,13 +22,19 @@ const SiteBar = () => {
         </NavLink>
       </div>
       <div>
-        <a href="">News</a>
+        <NavLink to="/news" activeClassName={style.active}>
+          News
+        </NavLink>
       </div>
       <div>
-        <a href="">Music</a>
+        <NavLink to="/music" activeClassName={style.active}>
+          Music
+        </NavLink>
       </div>
       <div>
-        <a href="">Settings</a>
+        <NavLink to="/settings" activeClassName={style.active}>
+          Settings
+        </NavLink>
       </div>
     </div>
   );

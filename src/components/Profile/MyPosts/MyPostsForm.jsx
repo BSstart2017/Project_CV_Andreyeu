@@ -1,15 +1,14 @@
 import React from "react";
 import { Field, Form, reduxForm } from "redux-form";
-import { TextArea } from "../../../hoc/FormControl/FormControl";
+import { TextArea } from "./../../commons/FormControl/FormControl";
 import { maxLengthControl, requireMy } from "../../../utils/validators/validators";
-//import style from "./MyPosts.module.css";
 
 const maxLength10 = maxLengthControl(10)
 
-const MyPostsForm = (props) => {
+const MyPostsForm = ({handleSubmit}) => {
 
   return (
-    <Form onSubmit={props.handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <div>
         <Field component={TextArea} validate={[requireMy, maxLength10 ]} name="newTextBody" />
       </div>

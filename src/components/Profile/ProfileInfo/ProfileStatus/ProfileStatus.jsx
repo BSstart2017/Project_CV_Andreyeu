@@ -1,49 +1,37 @@
-import React from "react";
+import React, {useState,useEffect} from "react";
 import style from "./ProfileStatus.module.css";
 
 
-class ProfileStatus extends React.Component {
+const ProfileStatus = ({statusText, getAddProfileStatus}) => {
 
-    state = {
-        editMode: false,
-        statusLocal: this.props.statusText
+    const [editMode, setEditMode] = useState(false)
+    const [status, setStatus] = useState(statusText)
+    
+    const onEditModeChangeFalse = () => {
+        setEditMode(false)
+        getAddProfileStatus(status) 
     }
 
-    onEditModeChangeFalse = () => {
-        this.setState({
-            editMode : false 
-        })
-        this.props.getAddProfileStatus(this.state.statusLocal) 
-    }
-
-    onEditModeChangeTrue = () => {
-        this.setState({
-            editMode : true
-        })
+    const onEditModeChangeTrue = () => {
+        setEditMode(true)
     }
     
-    OnStatusChange = (e) => {
-        this.setState({
-            statusLocal: e.target.value
-        })
+    const OnStatusChange = (e) => {
+        setStatus(e.target.value)
     }
+    
 
-    componentDidUpdate(prevProps, prevState){
-        if(prevProps.statusText !== this.props.statusText){
-            this.setState({
-                statusLocal: this.props.statusText
-            })
-        }
-    }
+    useEffect(() => {
+        setStatus(statusText)
+    }, [statusText])
 
-    render(){
         return (
             <div className={style.profileInfoBlock}>
-            {!this.state.editMode ? <div><span onClick={this.onEditModeChangeTrue}>{this.props.statusText || "No status"}</span></div>
-            :<div><input autoFocus={true} onChange={this.OnStatusChange} onBlur={this.onEditModeChangeFalse} value={this.state.statusLocal} /></div>}
+            {!editMode ? <div><span onClick={onEditModeChangeTrue}>{statusText || "No status"}</span></div>
+            :<div><input autoFocus={true} onChange={OnStatusChange} 
+            onBlur={onEditModeChangeFalse} value={status} /></div>}
             </div>
         )
-    } 
   }
 
 export default ProfileStatus 

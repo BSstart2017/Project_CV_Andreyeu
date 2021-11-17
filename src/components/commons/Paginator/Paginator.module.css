@@ -1,0 +1,7 @@
+.blockPaginator{
+    max-width: 800px;
+  }
+
+.activeStyle{
+    color: red;
+  }

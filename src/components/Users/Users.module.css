@@ -3,10 +3,6 @@
   grid-template-columns: 2fr 10fr;
 }
 
-.blockPagimation{
-  max-width: 800px;
-}
-
 .leftBlock{
   padding: 10px;
 }
@@ -15,10 +11,6 @@
   padding: 10px;
   display: grid;
   grid-template-columns: 5fr 5fr;
-}
-
-.activeStyle{
-  color: red;
 }
 
 .photoAva{

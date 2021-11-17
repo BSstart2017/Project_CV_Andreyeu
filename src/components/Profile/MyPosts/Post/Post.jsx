@@ -1,13 +1,13 @@
 import React from "react";
 import style from "./Post.module.css";
 
-const Post = props => {
+const Post = ({newText, col}) => {
     return (
             <div className={style.item}>
-              <img src='https://klike.net/uploads/posts/2019-03/1551511784_4.jpg' alt='' />
-             {props.newText}
+              <img src='https://klike.net/uploads/posts/2019-03/1551511784_4.jpg' alt='noPhoto' />
+             {newText}
               <div>
-                <span>like {props.col}</span> 
+                <span>like {col}</span> 
               </div>
             </div>
     )

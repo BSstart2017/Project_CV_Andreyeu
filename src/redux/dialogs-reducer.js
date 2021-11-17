@@ -1,5 +1,4 @@
-const SEND_MESSAGE = "SEND_MESSAGE"
-const NEW_MESSAGE_TEXT ="NEW_MESSAGE_TEXT"
+const SEND_MESSAGE = "dialogs/Aliaksandr_Andreyeu/SEND_MESSAGE"
 
 let defaultState =  {
   dialogData: [

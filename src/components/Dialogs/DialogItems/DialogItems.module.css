@@ -1,3 +1,7 @@
-.active{
+.dialog a.active{
     color: green;
+}
+
+.dialog a{
+    color: white;
 }

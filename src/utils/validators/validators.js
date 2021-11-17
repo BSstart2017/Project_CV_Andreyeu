@@ -7,3 +7,4 @@ export const maxLengthControl = (max) => (value)=> {
   if (value.length > max) return `Max length ${max} symbols`
   return undefined
 }
+

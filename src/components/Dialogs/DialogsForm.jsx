@@ -1,15 +1,14 @@
 import React from "react";
 import { Field, Form, reduxForm } from "redux-form";
-import { TextArea } from "../../hoc/FormControl/FormControl";
+import { TextArea } from "./../commons/FormControl/FormControl";
 import { maxLengthControl, requireMy } from "../../utils/validators/validators";
-import style from "./Dialogs.module.css";
 
 const maxLength = maxLengthControl(300);
 
-const DialogsForm = (props) => {
+const DialogsForm = ({handleSubmit}) => {
 
   return (
-    <Form onSubmit={props.handleSubmit}>
+    <Form onSubmit={handleSubmit}>
         <div>
         <Field component={TextArea} validate={[requireMy, maxLength]} 
         name="newMessageText" placeholder="Please write new message!"  />
@@ -21,6 +20,4 @@ const DialogsForm = (props) => {
   );
 };
 
-let DialogsReduxForm = reduxForm({form: "dialogsMessages"})(DialogsForm)
-
-export default DialogsReduxForm;
+export default reduxForm({form: "dialogsMessages"})(DialogsForm);
