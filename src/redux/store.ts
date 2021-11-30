@@ -4,6 +4,7 @@ import profileReducer from "./profile-reducer"
 import usersReducer from "./users-reducer"
 import authReducer from "./auth-reducer"
 import appReducer from "./app-reducer"
+import chatReducer from "./chat-reducer"
 import thunkMiddleware, { ThunkAction } from "redux-thunk"
 import { reducer as formReducer } from 'redux-form'
 
@@ -13,6 +14,7 @@ let rootReducer = combineReducers({
     usersReducer,
     authReducer,
     appReducer,
+    chatReducer,
     form: formReducer
 })
 

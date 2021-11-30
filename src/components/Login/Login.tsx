@@ -1,12 +1,19 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router";
-import { LoginDispatchToPropsType, LoginStateToPropsType } from "./LoginContainer";
+import { getLogin } from "../../redux/auth-reducer";
+import { AppStateType } from "../../redux/store";
 import LoginForm, { LoginFormDataType } from "./LoginForm";
 
-const Login : React.FC<LoginStateToPropsType & LoginDispatchToPropsType > = React.memo(({getLogin, isLogin, captcha}) => { 
+export const Login : React.FC = React.memo(() => { 
+
+  const isLogin = useSelector((state : AppStateType) => state.authReducer.isLogin)
+  const captcha = useSelector((state : AppStateType) => state.authReducer.captcha)
+
+  const dispatch = useDispatch()
 
   const onSubmit = (formData : LoginFormDataType ) => {
-    getLogin(formData.email, formData.password, formData.rememberMe, formData.captcha)
+    dispatch(getLogin(formData.email, formData.password, formData.rememberMe, formData.captcha))
   };
 
   if(isLogin) return <Redirect to="profile/" />
@@ -22,8 +29,6 @@ const Login : React.FC<LoginStateToPropsType & LoginDispatchToPropsType > = Reac
     </div>
   );
 })
-
-export default Login
   
 
 

@@ -1,13 +1,8 @@
-import { createSelector } from "reselect"
 import { AppStateType } from "../store"
 
-const getUsers = (state: AppStateType) => {
+export const getUsersSelector = (state: AppStateType) => {
     return state.usersReducer.users
 }
-
-export const getUsersSelector = createSelector(getUsers,(users) => {
-    return users   // superSelector
-}) 
 
 export const getPageCountSelector = (state: AppStateType) => {
     return state.usersReducer.pageCount
@@ -27,4 +22,8 @@ export const getIsPreloaderSelector = (state: AppStateType) => {
 
 export const getIsToggleFollowSelector = (state: AppStateType) => {
     return state.usersReducer.isToggleFollow
+}
+
+export const getFilterUsersSelector = (state: AppStateType) => {
+    return state.usersReducer.filter
 }

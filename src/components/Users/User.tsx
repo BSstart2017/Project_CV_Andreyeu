@@ -4,14 +4,14 @@ import userDefaultIg from "./../../assets/images/userDefault.jpg";
 import { NavLink } from "react-router-dom";
 import { UserResponseType } from "../../api/users-api";
 
-const User: React.FC<PropsType> = ({ user, isToggleFollow, toggleUnFollow, toggleFollow }) => {
+const User: React.FC<PropsType> = React.memo(({ user, isToggleFollow, toggleUnFollow, toggleFollow }) => {
   return (
     <div className={style.container}>
       <div className={style.leftBlock}>
         <NavLink to={"profile/" + user.id}>
           <img
             className={style.photoAva}
-            src={user.photos.small != null ? user.photos.small : userDefaultIg}
+            src={user.photos.small !== null ? user.photos.small : userDefaultIg}
             alt="noPhoto"
           />
         </NavLink>
@@ -47,7 +47,7 @@ const User: React.FC<PropsType> = ({ user, isToggleFollow, toggleUnFollow, toggl
       </div>
     </div>
   );
-};
+})
 
 export default User;
 

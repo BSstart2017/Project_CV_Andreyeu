@@ -1,8 +1,9 @@
 import { Dispatch } from "redux"
-import { ResultCodeEnum } from "../api/api"
+import { ApiResponseType, ResultCodeEnum } from "../api/api"
 import { updateObjectInArray } from "../utils/helper/objectHelper"
 import { BaseThunkType, InferActionType } from "./store"
-import userAPI, {UserResponseType} from "./../api/users-api"
+import userAPI, {UserResponseType} from "../api/users-api"
+import { UserFilterFormDataType } from "../components/Users/UserForm"
 
 let defaultState = {
   users: [] as Array<UserResponseType>,
@@ -10,7 +11,11 @@ let defaultState = {
   totalUsers: 0,
   activePage: 1,
   isPreloader: false,
-  isToggleFollow:[] as Array<number> // array of users ids
+  isToggleFollow:[] as Array<number>, // array of users ids
+  filter: {
+    term: '',
+    friend: null
+  } as UserFilterFormDataType
 }
 
 const usersReducer = (state = defaultState, action : ActionType) : DefaultStateType => {
@@ -35,6 +40,11 @@ const usersReducer = (state = defaultState, action : ActionType) : DefaultStateT
         return {...state, 
           isToggleFollow: action.isToggle ? [...state.isToggleFollow, action.id]
         : state.isToggleFollow.filter(id => id !== action.id) }
+    case "users/Aliaksandr_Andreyeu/FILTERS_USERS":
+      return {
+        ...state, 
+        filter: action.filter
+      }
     default:
       return state
   }
@@ -47,19 +57,22 @@ export const actions = {
   setTotalUsers: (totalUsers : number) => ({type : 'users/Aliaksandr_Andreyeu/TOTAL_USERS', totalUsers} as const),
   setActivePage: (activePage : number) => ({type : 'users/Aliaksandr_Andreyeu/ACTIVE_PAGE', activePage} as const),
   setIsPreloader: (isPreloader : boolean) => ({type : 'users/Aliaksandr_Andreyeu/IS_PRELOADER', isPreloader} as const),
-  setIsToggleFollow: (isToggle: boolean, id : number) => ({type : 'users/Aliaksandr_Andreyeu/IS_TOGGLE_FOLLOW', isToggle, id} as const)
+  setIsToggleFollow: (isToggle: boolean, id : number) => ({type : 'users/Aliaksandr_Andreyeu/IS_TOGGLE_FOLLOW', isToggle, id} as const),
+  setFilterUsers: (filter: UserFilterFormDataType) => ({type : "users/Aliaksandr_Andreyeu/FILTERS_USERS", filter} as const)
 }
 
-export const getUsers = (activePage : number, pageCount: number) : ThunkType => async (dispatch) => {
+export const getUsers = (activePage : number, pageCount: number, filter: UserFilterFormDataType) : ThunkType => async (dispatch) => {
       dispatch(actions.setIsPreloader(true))
-     const response = await userAPI.getUsers(activePage, pageCount)
+     const response = await userAPI.getUsers(activePage, pageCount, filter)
+        dispatch(actions.setFilterUsers(filter))
         dispatch(actions.setActivePage(activePage))
         dispatch(actions.setUsers(response.items))
         dispatch(actions.setTotalUsers(response.totalCount))
         dispatch(actions.setIsPreloader(false))
 }
 
-const _toggleFollowUnfollow = async (userId: number , dispatch : Dispatch<ActionType>, apiHelper : any, dispatchAction : (userId : number) => ActionType ) => {
+const _toggleFollowUnfollow = async (userId: number , dispatch : Dispatch<ActionType>, 
+  apiHelper : (userId: number) => Promise<ApiResponseType>, dispatchAction : (userId : number) => ActionType ) => {
   dispatch(actions.setIsToggleFollow(true, userId))
   const response = await apiHelper(userId)
       if(response.resultCode === ResultCodeEnum.Success){
@@ -69,15 +82,14 @@ const _toggleFollowUnfollow = async (userId: number , dispatch : Dispatch<Action
 }
 
 export const toggleUnFollow = (userId : number ): ThunkType => async (dispatch) => 
-_toggleFollowUnfollow(userId, dispatch, userAPI.deleteUnFollow, actions.unfollow)
+await _toggleFollowUnfollow(userId, dispatch, userAPI.deleteUnFollow, actions.unfollow)
 
 
 export const toggleFollow = (userId : number): ThunkType => async (dispatch) => 
-_toggleFollowUnfollow(userId,dispatch, userAPI.postFollow, actions.follow )
+await _toggleFollowUnfollow(userId,dispatch, userAPI.postFollow, actions.follow )
 
 
 export default usersReducer;
-
 
 type DefaultStateType = typeof defaultState
 type ActionType = InferActionType<typeof actions>

@@ -1,10 +1,13 @@
+import { UserFilterFormDataType } from "../components/Users/UserForm"
 import { ApiResponseType, instance } from "./api"
 import { ProfilePhotoType } from "./profile-api"
 
 
 const userAPI = {
-    getUsers(activePage : number, pageCount : number){
-        return instance.get<UsersResponseDataType>(`users?page=${activePage}&count=${pageCount}`)
+    getUsers(activePage : number, pageCount : number, filter: UserFilterFormDataType){
+        return instance.get<UsersResponseDataType>(`users?page=${activePage}&count=${pageCount}` + 
+        (filter.term.length === 0 ? '' : `&term=${filter.term}`) + 
+        (filter.friend === null ? '' : `&friend=${filter.friend}`))
         .then(response=>response.data)
     },
     postFollow(userId : number){

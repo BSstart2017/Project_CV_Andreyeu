@@ -44,13 +44,13 @@ export default compose<React.ComponentType>(connect<ProfileContainerStateToProps
 withRouter)(ProfileContainer)
 
 
-type ProfileContainerStateToPropsType = {
+export type ProfileContainerStateToPropsType = {
   profile: ProfileResponseDataType | null
   myId: number | null
   status : string
 }
 
-type ProfileContainerDispatchToProps = {
+export type ProfileContainerDispatchToProps = {
   getProfileUser: (userId : number) => void
   getNewAvatar: (file: File) => void
   getProfileStatus: (userId : number) => void

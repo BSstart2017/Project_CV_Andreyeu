@@ -59,6 +59,7 @@ export const getCaptchaUrl = (): ThunkType => async (dispatch) => {
 }
 
 export const getLogout = (): ThunkType => async (dispatch) => {
+
   const response = await authApi.deleteLogout()
     if (response.resultCode === ResultCodeEnum.Success){
       dispatch(actions.setAuthUserSuccess(null, null, null, false))

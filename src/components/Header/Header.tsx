@@ -1,23 +1,46 @@
+import { Avatar, Badge, Button, Col, Row } from "antd";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import style from "./Header.module.css"
-import { HeaderDispatchToPropsType, HeaderStateToPropsType } from "./HeaderContainer";
+import { getLogout } from "../../redux/auth-reducer";
+import { AppStateType } from "../../redux/store";
+import { Layout } from 'antd';
+import Text from "antd/lib/typography/Text";
+import { UserOutlined } from '@ant-design/icons';
+const { Header } = Layout;
 
-const Header : React.FC<HeaderStateToPropsType & HeaderDispatchToPropsType>= ({isLogin, login, getLogout}) => {
-      return (
-        <div className={style.header}>
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/NBC_logo.svg/2000px-NBC_logo.svg.png" 
-          alt='noPhoto'/>
-          <div className={style.rightBlock}>
-              {isLogin 
-               ? <div>
-                 <span>{login}</span>
-                  <button onClick={getLogout}>log out</button>
-                 </div>
-               : <NavLink to={'/login'}>Login</NavLink>}
-          </div>
-        </div>
-      );
-    }
+export const Headers: React.FC = () => {
 
-export default Header
+  const isLogin = useSelector((state: AppStateType) => state.authReducer.isLogin)
+  const login = useSelector((state: AppStateType) => state.authReducer.login)
+
+  const dispatch = useDispatch()
+
+  const onGetLogout = () => dispatch(getLogout())
+
+  return (
+    <Header className="header">
+      <Row>
+        <Col span={19}>
+          <div className="logo" />
+        </Col>
+        {isLogin
+          ? <>
+            <Col span={1}>
+              <span className="avatar-item">
+                <Badge count={1}>
+                  <Avatar shape="square" icon={<UserOutlined />} />
+                </Badge>
+              </span>
+            </Col>
+            <Col span={1}><Text type="success" >{login}</Text></Col>
+            <Col span={3}>
+              <Button type="primary" onClick={onGetLogout}>log out</Button>
+            </Col>
+          </>
+          : <Col span={4}> <Button type="primary" ><NavLink to={'/login'}>Login</NavLink></Button></Col>}
+      </Row>
+    </Header>
+
+  );
+}
