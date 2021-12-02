@@ -2,7 +2,7 @@ import { AppStateType } from "../store"
 
 export const getUsersSelector = (state: AppStateType) => {
     return state.usersReducer.users
-}
+} 
 
 export const getPageCountSelector = (state: AppStateType) => {
     return state.usersReducer.pageCount

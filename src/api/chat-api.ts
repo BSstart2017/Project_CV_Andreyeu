@@ -4,7 +4,6 @@ const subcribers = {
 }
 
 let ws: WebSocket | null = null
-type EventsNamesType = 'messages-received' | 'status-changed'
 
 const closeHandler = () => {
   notifySubscribersAboutStatus('pending')
@@ -42,31 +41,30 @@ function createChannel() {
   ws.addEventListener('error', errorHandler)
 }
 
-
 export const chatAPI = {
   start() {
-      createChannel()
+    createChannel()
   },
   stop() {
-      subcribers['messages-received'] = []
-      subcribers['status-changed'] = []
-      cleanUp()
-      ws?.close()
+    subcribers['messages-received'] = []
+    subcribers['status-changed'] = []
+    cleanUp()
+    ws?.close()
   },
   subscribe(eventName: EventsNamesType, callback: MessagesReceivedSubscriberType | StatusChangedSubscriberType) {
-      // @ts-ignore
-      subcribers[eventName].push(callback)
-      return () => {
-          // @ts-ignore
-          subcribers[eventName] = subcribers[eventName].filter(s => s !== callback)
-      }
-  },
-  unsubscribe(eventName: EventsNamesType, callback: MessagesReceivedSubscriberType | StatusChangedSubscriberType) {
+    // @ts-ignore
+    subcribers[eventName].push(callback)
+    return () => {
       // @ts-ignore
       subcribers[eventName] = subcribers[eventName].filter(s => s !== callback)
+    }
+  },
+  unsubscribe(eventName: EventsNamesType, callback: MessagesReceivedSubscriberType | StatusChangedSubscriberType) {
+    // @ts-ignore
+    subcribers[eventName] = subcribers[eventName].filter(s => s !== callback)
   },
   sendMessage(message: string) {
-      ws?.send(message)
+    ws?.send(message)
   }
 }
 
@@ -79,4 +77,5 @@ export type ChatMessageAPIType = {
   userId: number
   userName: string
 }
+type EventsNamesType = 'messages-received' | 'status-changed'
 export type StatusType = 'pending' | 'ready' | 'error'

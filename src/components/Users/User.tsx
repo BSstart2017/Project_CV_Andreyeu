@@ -1,14 +1,16 @@
-import React from "react";
+import React, {FC, useEffect} from "react";
 import style from "./Users.module.css";
 import userDefaultIg from "./../../assets/images/userDefault.jpg";
-import { NavLink } from "react-router-dom";
+import {NavLink, useHistory} from "react-router-dom";
 import { UserResponseType } from "../../api/users-api";
 
-const User: React.FC<PropsType> = React.memo(({ user, isToggleFollow, toggleUnFollow, toggleFollow }) => {
+const User: FC<PropsType> = React.memo(({ user, isToggleFollow, toggleUnFollow, toggleFollow }) => {
+
+
   return (
     <div className={style.container}>
       <div className={style.leftBlock}>
-        <NavLink to={"profile/" + user.id}>
+        <NavLink to={"profile/" + user.id} >
           <img
             className={style.photoAva}
             src={user.photos.small !== null ? user.photos.small : userDefaultIg}

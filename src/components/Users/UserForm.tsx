@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import { Formik, Form, Field } from 'formik';
 
 const validateForm = () => {
@@ -6,7 +6,7 @@ const validateForm = () => {
   return errors;
 }
 
-const UserForm: React.FC<UserFilterPropsType> = React.memo(({onFilterChange}) => {
+const UserForm: FC<UserFilterPropsType> = React.memo(({onFilterChange}) => {
   const onSubmitValue = (values: formType, { setSubmitting }: {setSubmitting :  (isSubmitting: boolean) => void }) => {
     const filter : UserFilterFormDataType ={
       term : values.term,

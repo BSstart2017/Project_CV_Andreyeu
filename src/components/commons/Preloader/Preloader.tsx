@@ -1,12 +1,12 @@
-import React from "react";
+import React, {FC} from "react";
 import imgPreloader from "./../../../assets/images/preloader.png"
 
-const Preloader = () => {
-    return (
-        <div>
-            <img src={imgPreloader} alt="NoPhoto" />
-        </div>
-    )
+const Preloader: FC = () => {
+  return (
+    <div>
+      <img src={imgPreloader} alt="NoPhoto"/>
+    </div>
+  )
 }
 
 export default Preloader

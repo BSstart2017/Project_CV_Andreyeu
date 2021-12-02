@@ -1,14 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import style from "./ProfileStatus.module.css";
+import {useDispatch} from "react-redux";
+import {getAddProfileStatus} from "../../../../redux/profile-reducer";
 
-const ProfileStatus: React.FC<PropsType> = ({statusText, getAddProfileStatus}) => {
+const ProfileStatus: React.FC<PropsType> = ({statusText}) => {
 
-    const [editMode, setEditMode] = React.useState(false)
-    const [status, setStatus] = React.useState(statusText)
-    
+    const [editMode, setEditMode] = useState(false)
+    const [status, setStatus] = useState(statusText)
+
+    const dispatch = useDispatch()
+
     const onEditModeChangeFalse = () => {
         setEditMode(false)
-        getAddProfileStatus(status) 
+        dispatch(getAddProfileStatus(status))
     }
 
     const onEditModeChangeTrue = () => {
@@ -20,7 +24,7 @@ const ProfileStatus: React.FC<PropsType> = ({statusText, getAddProfileStatus}) =
     }
     
 
-    React.useEffect(() => {
+    useEffect(() => {
         setStatus(statusText)
     }, [statusText])
 
@@ -37,5 +41,4 @@ export default ProfileStatus
 
 type PropsType = {
     statusText: string
-    getAddProfileStatus: (status : string) => void
 }

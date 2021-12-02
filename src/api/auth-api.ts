@@ -1,9 +1,4 @@
-import {
-  ApiResponseType,
-  instance,
-  ResultCodeCaptchaEnum,
-  ResultCodeEnum,
-} from "./api";
+import {ApiResponseType, instance, ResultCodeCaptchaEnum, ResultCodeEnum} from "./api";
 
 const authApi = {
   getAuthUser() {
@@ -18,16 +13,17 @@ const authApi = {
     captcha: string | null = null
   ) {
     return instance
-      .post<
-        ApiResponseType<LoginResponseDataType, ResultCodeCaptchaEnum | ResultCodeEnum>
-      >(`auth/login/`, { email, password, rememberMe, captcha })
+      .post<ApiResponseType<LoginResponseDataType, ResultCodeCaptchaEnum | ResultCodeEnum>>(`auth/login/`, {
+        email,
+        password,
+        rememberMe,
+        captcha
+      })
       .then((response) => response.data);
   },
   deleteLogout() {
     return instance
-      .delete<
-        ApiResponseType<LoginResponseDataType, ResultCodeCaptchaEnum | ResultCodeEnum>
-      >(`auth/login/`)
+      .delete<ApiResponseType<LoginResponseDataType, ResultCodeCaptchaEnum | ResultCodeEnum>>(`auth/login/`)
       .then((response) => response.data);
   },
 };
@@ -36,11 +32,11 @@ export default authApi;
 
 
 type LoginResponseDataType = {
-    userId: number;
-  };
-  
-  type MeResponseDataType = {
-    id: number;
-    email: string;
-    login: string;
-  };
+  userId: number;
+};
+
+type MeResponseDataType = {
+  id: number;
+  email: string;
+  login: string;
+};
