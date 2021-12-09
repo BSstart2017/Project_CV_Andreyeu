@@ -1,7 +1,7 @@
-import {Layout} from "antd";
-import React, {FC} from "react";
+import {Col, Layout, Row} from "antd";
+import React, {FC, useEffect, useState} from "react";
 import {Headers} from "../../components/Header/Header";
-import {Route, Switch} from "react-router-dom";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Dialogs from "../../components/Dialogs/Dialogs";
 import Profile from "../../components/Profile/Profile";
 import ChatPage from "../Chat/ChatPage";
@@ -9,18 +9,35 @@ import {Users} from "../../components/Users/Users";
 import {Login} from "../../components/Login/Login";
 import {SideBar} from "../../components/SideBar/SideBar";
 import {Redirect} from "react-router";
+import {useSelector} from "react-redux";
+import {getCollapsed} from "../../redux/Selectors/appSelector";
 
 const {Content} = Layout;
 
 export const AuthPage: FC<PropsType> = ({onLogin, setOnLogin}) => {
+  const collapsed = useSelector(getCollapsed)
+  let [spanSideBar, setSpanSideBar] = useState<number>(1)
+  let [spanContent, setSpanContent] = useState<number>(23)
+
+  useEffect(() => {
+    debugger
+    if(collapsed){
+      setSpanSideBar(()=>spanSideBar-1)
+      setSpanContent(()=>spanContent+1)
+    } else {
+      setSpanSideBar(()=>spanSideBar+1)
+      setSpanContent(()=>spanContent-1)
+    }
+  }, [collapsed])
+
   return (
     <>
-      { !onLogin
+      {!onLogin
         ? <Layout>
           <Headers/>
-          <Layout>
-            <SideBar />
-            <Layout style={{padding: '0 24px 24px'}}>
+          <Row>
+              <SideBar spanNumber={spanSideBar}/>
+              <Col span={spanContent} style={{padding: '0 24px 24px'}}>
               <Content className="site-layout-background" style={{padding: 24, margin: 0, minHeight: 280}}>
                 <Switch>
                   <Route path="/dialogs" render={() => <Dialogs/>}/>
@@ -32,8 +49,8 @@ export const AuthPage: FC<PropsType> = ({onLogin, setOnLogin}) => {
                   <Route path="*" render={() => <div>404 non found</div>}/>
                 </Switch>
               </Content>
-            </Layout>
-          </Layout>
+            </Col>
+          </Row>
         </Layout>
         : <Route path="/login" render={() => <Login setOnLogin={setOnLogin}/>}/>
       }
@@ -43,5 +60,5 @@ export const AuthPage: FC<PropsType> = ({onLogin, setOnLogin}) => {
 
 type PropsType = {
   onLogin: boolean
-  setOnLogin: (onLogin:boolean) => void
+  setOnLogin: (onLogin: boolean) => void
 }

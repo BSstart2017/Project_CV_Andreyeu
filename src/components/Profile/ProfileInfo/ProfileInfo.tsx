@@ -27,16 +27,19 @@ const ProfileInfo: FC<PropsType> = (
   }
 
   return (
-    <div>
-      {profile === null ? <></> : <>
-        <div>
-          <img src={profile.photos.large || userDefaultImg} alt='noPhoto'/>
+    <div style={{ background: `url(${process.env.PUBLIC_URL}/assets/images/Members/5f6d2c93c75db-bp-cover-image.jpg)
+     center center / cover no-repeat`,borderRadius:'30px', height:'70%'}}>
+      {profile === null ? <></>
+        : <>
+        <div style={{textAlign: 'center', paddingTop: 200}}>
+          <img src={profile.photos.small || userDefaultImg} alt='noPhoto'/>
         </div>
         {isOwner && <div><input type="file" onChange={onAddNewAvatar}/></div>}
         {editMode ?
           <ProfileContactsForm initialValues={profile} setEditMode={setEditMode} onSubmit={onSubmit} profile={profile}/>
           : <ProfileContacts profile={profile} isOwner={isOwner} setEditMode={setEditMode}/>}
-        <ProfileStatus statusText={status} /></>}
+        <ProfileStatus statusText={status} />
+      </>}
     </div>
   )
 }

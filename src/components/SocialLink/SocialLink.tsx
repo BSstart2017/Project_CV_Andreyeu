@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 
-const CustomerIconCard : FC = () => {
+const SocialLink : FC = () => {
   return (
     <div>
 
@@ -8,4 +8,4 @@ const CustomerIconCard : FC = () => {
   )
 }
 
-export default CustomerIconCard
+export default SocialLink

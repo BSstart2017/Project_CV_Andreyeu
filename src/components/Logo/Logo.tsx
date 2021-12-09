@@ -2,26 +2,28 @@ import React, {FC} from "react";
 import imgLogoPhoto from "../../assets/images/LoandingHome/vkfooterlogo.png";
 import {Col} from "antd";
 import Text from "antd/es/typography/Text";
+import {Property} from "csstype";
 
-const Logo: FC<PropsType> = ({spanNumberLogo= 1 ,spanNumberText = 1, textPosition = ''}) => {
+const Logo: FC<PropsType> = ({spanNumberLogo= 1 ,spanNumberText = 1,
+                               textPosition='center', textColor='white'}) => {
 
   return (
     <>
       <Col span={spanNumberLogo} className="logo">
         <img src={imgLogoPhoto} alt="NoPhoto"/>
       </Col>
-      { /* @ts-ignore */}
-      <Col span={spanNumberText} style={{textAlign: `${textPosition}`, color: 'white', fontWeight: "bolder", verticalAlign: 'middle'}}>
-        <Text>VIKINGER</Text>
+      <Col span={spanNumberText} >
+        <Text style={{textAlign: `${textPosition}`, color: `${textColor}`, fontWeight: "bolder"}}>VIKINGER</Text>
       </Col>
     </>
   )
 }
-// todo: ts-ignore
+
 export default Logo
 
 type PropsType = {
   spanNumberText : number
   spanNumberLogo: number
-  textPosition?: string
+  textPosition?:  Property.TextAlign | undefined
+  textColor? :  Property.Color | undefined
 }

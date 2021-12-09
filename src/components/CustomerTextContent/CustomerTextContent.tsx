@@ -2,7 +2,7 @@ import React, {FC} from 'react'
 import {Col, Row} from "antd";
 import Text from "antd/es/typography/Text";
 
-const CustomeTextContent : FC = ( ) => {
+const CustomerTextContent : FC = ( ) => {
   return (
     <div style={{paddingTop: 100}}>
       <Row>
@@ -25,4 +25,4 @@ const CustomeTextContent : FC = ( ) => {
   )
 }
 
-export default  CustomeTextContent
+export default  CustomerTextContent

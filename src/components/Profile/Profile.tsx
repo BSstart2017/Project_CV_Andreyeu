@@ -8,6 +8,7 @@ import {
   getProfileUser
 } from "../../redux/profile-reducer";
 import {useHistory, useRouteMatch} from "react-router-dom";
+import {Col, Row} from "antd";
 
 const Profile: React.FC = () => {
 
@@ -35,10 +36,14 @@ const Profile: React.FC = () => {
   }, [match.params.userId])
 
     return (
-      <div>
-        <ProfileInfo isOwner={!match.params.userId} profile={profile} status={status}/>
-        <MyPosts />
-      </div>
+      <Row justify={"center"}>
+          <Col span={18}>
+            <ProfileInfo isOwner={!match.params.userId} profile={profile} status={status}/>
+          </Col>
+          <Col span={18}>
+            <MyPosts />
+          </Col>
+      </Row>
     );
   }
 

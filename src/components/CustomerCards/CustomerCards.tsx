@@ -6,7 +6,7 @@ import {CardType} from "../../redux/startLoginPage-reducer";
 
 
 const CustomerCards: FC<PropsType> = ({spanNumber = 5, paddingCards = 48, justifyPosition= "center",
-                                        textColorCard = 'red',
+                                        textColorCard = 'black',
                                         textHeaderSizeCard = '25px', cards }) => {
   return (
     <>
