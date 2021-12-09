@@ -19,6 +19,7 @@ const userAPI = {
 }
 
 export default userAPI
+
 type UsersResponseDataType = {
   items: Array<UserResponseType>
   Items: UserResponseType

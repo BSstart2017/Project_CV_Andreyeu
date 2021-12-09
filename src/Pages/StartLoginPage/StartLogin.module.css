@@ -1,0 +1,14 @@
+.startImageFont{
+    background: url(../../assets/images/LoandingHome/mainbg-1.jpg) no-repeat;
+    background-size:100% 100%;
+    min-height: 600px;
+}
+
+
+.contentCarouselStyle{
+    height: 160px;
+    color: #fff;
+    line-height: 160px;
+    text-align: center;
+    background: #364d79;
+}

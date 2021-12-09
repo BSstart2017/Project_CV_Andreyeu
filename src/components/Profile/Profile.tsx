@@ -7,7 +7,7 @@ import {
   getProfileStatus,
   getProfileUser
 } from "../../redux/profile-reducer";
-import {useHistory} from "react-router-dom";
+import {useHistory, useRouteMatch} from "react-router-dom";
 
 const Profile: React.FC = () => {
 
@@ -17,9 +17,12 @@ const Profile: React.FC = () => {
 
   const dispatch = useDispatch()
   const history = useHistory()
+  const match: { params: {
+    userId: string
+    }} = useRouteMatch()
 
   useEffect(() => {
-    let userId: number | null = +history.location.pathname.split('/')[history.location.pathname.split('/').length - 1]
+    let userId: number | null = +match.params.userId
     if (!userId) {
       userId = myId
       if (!userId) {
@@ -29,11 +32,11 @@ const Profile: React.FC = () => {
     }
     dispatch(getProfileUser(userId))
     dispatch(getProfileStatus(userId))
-  }, [history.location.pathname])
+  }, [match.params.userId])
 
     return (
       <div>
-        <ProfileInfo isOwner={!+history.location.pathname.split('/')[history.location.pathname.split('/').length - 1]} profile={profile} status={status}/>
+        <ProfileInfo isOwner={!match.params.userId} profile={profile} status={status}/>
         <MyPosts />
       </div>
     );
