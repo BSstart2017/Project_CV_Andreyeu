@@ -1,10 +1,10 @@
 import React, {FC} from "react";
-import style from "./MyPosts.module.css";
 import MyPostsReduxForm, {MyPostFormDataType} from "./MyPostsForm";
 import Post from "./Post/Post";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../redux/store";
 import {actions} from "../../../redux/profile-reducer";
+import {Col, Row} from "antd";
 
 
 const MyPosts: FC = () => {
@@ -22,11 +22,13 @@ const MyPosts: FC = () => {
   };
 
   return (
-    <div className={style.myPostBlock}>
-      <h3> My post </h3>
-      <MyPostsReduxForm onSubmit={onSubmit}/>
-      {postElement}
-    </div>
+    <Row justify={"center"}>
+      <Col span={24}>
+        <h3> My post </h3>
+        <MyPostsReduxForm onSubmit={onSubmit}/>
+        {postElement}
+      </Col>
+    </Row>
   );
 };
 

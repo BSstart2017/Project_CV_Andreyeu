@@ -1,6 +1,5 @@
 import React, {FC} from "react";
 import {Col, Row} from "antd";
-import Text from "antd/es/typography/Text";
 import {Property} from "csstype";
 import {CardType} from "../../redux/startLoginPage-reducer";
 
@@ -17,11 +16,11 @@ const CustomerCards: FC<PropsType> = ({spanNumber = 5, paddingCards = 48, justif
               <img src={elements.img} alt='noPhoto'/>
             </div>
             <div style={{paddingBottom: 10}}>
-              <Text style={{color: `${textColorCard}`,fontSize: `${textHeaderSizeCard}`, fontWeight: "bolder"}}>
-                {elements.headerText}</Text>
+              <span style={{color: `${textColorCard}`,fontSize: `${textHeaderSizeCard}`, fontWeight: "bolder"}}>
+                {elements.headerText}</span>
             </div>
             <div>
-              <Text>{elements.footerText}</Text>
+              <span>{elements.footerText}</span>
             </div>
           </Col>)
         )}

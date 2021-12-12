@@ -29,8 +29,8 @@ export const Headers: React.FC = () => {
         <Col span={19}>
           <Row style={{textAlign: 'center'}}>
             <Logo spanNumberText={2} spanNumberLogo={1}/>
-            <Col span={2} style={{textAlign: 'center'}}>
-              <Button type="primary" onClick={onToggleCollapsed}>
+            <Col span={1}>
+              <Button type="primary" onClick={onToggleCollapsed} style={{borderRadius: '50%'}}>
                 {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
               </Button>
             </Col>

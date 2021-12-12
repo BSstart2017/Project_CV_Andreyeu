@@ -6,14 +6,15 @@ import ProfileContactsForm, {ProfileContactsFormDataType} from "./ProfileContact
 import {ProfileResponseDataType} from "../../../api/profile-api";
 import {useDispatch} from "react-redux";
 import {getNewAvatar, getNewContactsEdit} from "../../../redux/profile-reducer";
+import {Badge, Col, Input, Row} from "antd";
+import SocialLink from "../../SocialLink/SocialLink";
+import Text from "antd/es/typography/Text";
 
 const ProfileInfo: FC<PropsType> = (
   {profile, status, isOwner}
 ) => {
 
   const dispatch = useDispatch()
-
-
 
   const [editMode, setEditMode] = useState(false)
 
@@ -27,20 +28,55 @@ const ProfileInfo: FC<PropsType> = (
   }
 
   return (
-    <div style={{ background: `url(${process.env.PUBLIC_URL}/assets/images/Members/5f6d2c93c75db-bp-cover-image.jpg)
-     center center / cover no-repeat`,borderRadius:'30px', height:'70%'}}>
+    <>
       {profile === null ? <></>
         : <>
-        <div style={{textAlign: 'center', paddingTop: 200}}>
-          <img src={profile.photos.small || userDefaultImg} alt='noPhoto'/>
-        </div>
-        {isOwner && <div><input type="file" onChange={onAddNewAvatar}/></div>}
-        {editMode ?
-          <ProfileContactsForm initialValues={profile} setEditMode={setEditMode} onSubmit={onSubmit} profile={profile}/>
-          : <ProfileContacts profile={profile} isOwner={isOwner} setEditMode={setEditMode}/>}
-        <ProfileStatus statusText={status} />
-      </>}
-    </div>
+          <Col span={24} style={{background: `url(${process.env.PUBLIC_URL}/assets/images/Members/5f6d2c93c75db-bp-cover-image.jpg)
+     center center / cover no-repeat`, borderRadius: '30px 30px 0px 0px', height: '400px'}}>
+            <div style={{textAlign: 'center', paddingTop: 250 }}>
+              <Badge count={1} color={"blue"} offset={[-75, 150]} style={{fontSize: 'large'}}>
+                <img src={profile.photos.small || userDefaultImg} alt='noPhoto'
+                     style={{height: '150px', borderRadius: '30px'}}/>
+              </Badge>
+            </div>
+          </Col>
+          <Row justify={"center"} style={{textAlign: 'center', paddingTop: 40, paddingBottom:40 ,backgroundColor:'white'}}>
+            <Col span={8}>
+              <Row>
+                <Col span={8}>
+                  <div><Text>10</Text></div>
+                  <div><Text>Post</Text></div>
+                </Col>
+                <Col span={8}>
+                  <div><Text>6</Text></div>
+                  <div><Text>Friends</Text></div>
+                </Col>
+                <Col span={8}>
+                  <div><Text>4</Text></div>
+                  <div><Text>Comments</Text></div>
+                </Col>
+              </Row>
+            </Col>
+            <Col span={8}>
+              <div><Text>{profile.fullName}</Text></div>
+              <div><Text>{profile.contacts.facebook}</Text></div>
+              <ProfileStatus statusText={status}/>
+            </Col>
+            <Col span={8}>
+              <SocialLink />
+            </Col>
+          </Row>
+          <Col span={24}>
+              {isOwner && <div><Input type="file" onChange={onAddNewAvatar}/></div>}
+            </Col>
+          <Col span={24}>
+            {editMode ?
+              <ProfileContactsForm initialValues={profile} setEditMode={setEditMode} onSubmit={onSubmit}
+                                   profile={profile}/>
+              : <ProfileContacts profile={profile} isOwner={isOwner} setEditMode={setEditMode}/>}
+          </Col>
+        </>}
+    </>
   )
 }
 

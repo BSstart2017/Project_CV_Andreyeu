@@ -67,7 +67,7 @@ export const getNewContactsEdit = (profile : ProfileResponseDataType) : ThunkTyp
   const userId = getState().authReducer.id
   const response = await profileApi.putContactsEdit(profile)
     if(response.resultCode === 0){
-      if(userId) dispatch(getProfileUser(userId))
+      if(userId) await dispatch(getProfileUser(userId))
     }else {
        dispatch(stopSubmit("profileContacts", {_error: response.messages[0]}))
        return Promise.reject()

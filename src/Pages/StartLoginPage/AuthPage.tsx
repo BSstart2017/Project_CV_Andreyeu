@@ -20,7 +20,6 @@ export const AuthPage: FC<PropsType> = ({onLogin, setOnLogin}) => {
   let [spanContent, setSpanContent] = useState<number>(23)
 
   useEffect(() => {
-    debugger
     if(collapsed){
       setSpanSideBar(()=>spanSideBar-1)
       setSpanContent(()=>spanContent+1)

@@ -1,15 +1,20 @@
 import React from "react";
 import style from "./Post.module.css";
+import {Col, Row} from "antd";
 
 const Post: React.FC<PropsType> = ({newText, likeCount}) => {
   return (
-    <div className={style.item}>
-      <img src='https://klike.net/uploads/posts/2019-03/1551511784_4.jpg' alt='noPhoto'/>
-      {newText}
-      <div>
+    <Row>
+      <Col span={2}>
+        <img src='https://klike.net/uploads/posts/2019-03/1551511784_4.jpg' alt='noPhoto'/>
+      </Col>
+      <Col span={2}>
+        <span>{newText}</span>
+      </Col>
+      <Col span={2}>
         <span>like {likeCount}</span>
-      </div>
-    </div>
+      </Col>
+    </Row>
   )
 }
 

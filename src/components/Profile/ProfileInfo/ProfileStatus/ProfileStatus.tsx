@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import style from "./ProfileStatus.module.css";
 import {useDispatch} from "react-redux";
 import {getAddProfileStatus} from "../../../../redux/profile-reducer";
 
@@ -29,11 +28,11 @@ const ProfileStatus: React.FC<PropsType> = ({statusText}) => {
     }, [statusText])
 
         return (
-            <div className={style.profileInfoBlock}>
+            <>
             {!editMode ? <div><span onClick={onEditModeChangeTrue}>{statusText || "No status"}</span></div>
-            :<div><input autoFocus={true} onChange={OnStatusChange} 
+            :<div><input autoFocus={true} onChange={OnStatusChange}
             onBlur={onEditModeChangeFalse} value={status} /></div>}
-            </div>
+            </>
         )
   }
 

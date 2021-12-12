@@ -2,6 +2,7 @@ import React, {FC, useEffect} from "react";
 import {Provider, useDispatch, useSelector} from "react-redux";
 import {BrowserRouter, Route} from "react-router-dom";
 import "./App.css";
+import 'formik-antd/es/input/style'
 import Preloader from "./components/commons/Preloader/Preloader";
 import {initializedApp} from "./redux/app-reducer"
 import store, {AppStateType} from "./redux/store";

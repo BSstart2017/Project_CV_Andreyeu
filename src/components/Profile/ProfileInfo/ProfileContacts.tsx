@@ -1,6 +1,6 @@
 import React from "react";
-import {ProfileContactsDataType, ProfileResponseDataType} from "../../../api/profile-api";
-import style from "./../Profile.module.css"
+import {ProfileContactsDataType, ProfileResponseDataType} from "../../../api/profile-api";  
+import {Row} from "antd";
 
 const ProfileContacts: React.FC<PropsType> = ({profile, setEditMode, isOwner}) => {
 
@@ -9,7 +9,7 @@ const ProfileContacts: React.FC<PropsType> = ({profile, setEditMode, isOwner}) =
   }
 
   return (
-    <div className={style.contactContainer}>
+    <Row>
       {isOwner && <div>
           <button onClick={onSetEditMode}>Edit</button>
       </div>}
@@ -19,13 +19,13 @@ const ProfileContacts: React.FC<PropsType> = ({profile, setEditMode, isOwner}) =
       {profile.lookingForAJob && <div><b>My skills :</b> {profile.lookingForAJobDescription}</div>}
       {Object.keys(profile.contacts).map(key => {
           return (
-            <div key={key} className={style.blockContact}>
+            <div key={key}>
               <b>{key} :</b> {profile.contacts[key as keyof ProfileContactsDataType]}
             </div>
           )
         }
       )}
-    </div>
+    </Row>
   );
 };
 
