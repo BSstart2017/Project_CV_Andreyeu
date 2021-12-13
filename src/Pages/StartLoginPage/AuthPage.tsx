@@ -1,7 +1,7 @@
 import {Col, Layout, Row} from "antd";
 import React, {FC, useEffect, useState} from "react";
 import {Headers} from "../../components/Header/Header";
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import Dialogs from "../../components/Dialogs/Dialogs";
 import Profile from "../../components/Profile/Profile";
 import ChatPage from "../Chat/ChatPage";

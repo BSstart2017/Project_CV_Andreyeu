@@ -1,10 +1,14 @@
 import React, {FC, useState} from 'react';
-import {ProfileResponseDataType} from "../../../api/profile-api";
-import {Divider} from "antd";
+import {Col, Divider, Row} from "antd";
 import {FormOutlined} from "@ant-design/icons";
 import AboutMeForm from "./AboutMeForm";
+import {useSelector} from "react-redux";
+import {AppStateType} from "../../redux/store";
 
-const AboutMe: FC<PropsType> = ({profile, status}) => {
+const AboutMe: FC = () => {
+
+  const profile = useSelector((state: AppStateType) => state.profileReducer.profile)
+  const status = useSelector((state: AppStateType) => state.profileReducer.status)
 
   let [editAboutMe, setEditAboutMe] = useState<boolean>(false)
 
@@ -13,12 +17,12 @@ const AboutMe: FC<PropsType> = ({profile, status}) => {
   }
 
   return (
-    <div>
-      <Divider orientation="center" >About Me <FormOutlined onClick={onEditAboutMe}/></Divider>
-      <div style={{paddingLeft: 30}}>
+    <Row justify={"center"} style={{backgroundColor:'white', borderRadius: '30px', marginBottom: 20}}>
+      <Divider orientation="center" style={{paddingLeft: 30, paddingRight: 30}} >About Me <FormOutlined onClick={onEditAboutMe}/></Divider>
+      <Col style={{paddingLeft: 30}} span={24}>
         {editAboutMe
           ? <>
-            <AboutMeForm status={status} profile={profile}/>
+            <AboutMeForm status={status} profile={profile} setEditAboutMe={setEditAboutMe}/>
           </>
           :<>
             <p>
@@ -32,14 +36,9 @@ const AboutMe: FC<PropsType> = ({profile, status}) => {
               <span style={{fontSize: '16px'}}>{status}</span>
             </p>
           </>}
-      </div>
-    </div>
+      </Col>
+    </Row>
   )
 }
 
 export default AboutMe
-
-type PropsType = {
-  status: string
-  profile: ProfileResponseDataType | null
-}

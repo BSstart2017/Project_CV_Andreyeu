@@ -22,7 +22,7 @@ const MyPosts: FC = () => {
   };
 
   return (
-    <Row justify={"center"}>
+    <Row justify={"center"}  style={{backgroundColor:'white', borderRadius: '30px'}}>
       <Col span={24}>
         <h3> My post </h3>
         <MyPostsReduxForm onSubmit={onSubmit}/>

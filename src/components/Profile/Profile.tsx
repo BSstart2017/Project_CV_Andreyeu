@@ -7,12 +7,12 @@ import {
   getProfileStatus,
   getProfileUser
 } from "../../redux/profile-reducer";
-import {useHistory, useRouteMatch} from "react-router-dom";
+import {Route, Switch, useHistory, useRouteMatch} from "react-router-dom";
 import {Col, Row, Tabs} from "antd";
 import {AppleOutlined} from '@ant-design/icons';
-import AboutMe from "../AboutMePage/AboutMe/AboutMe";
-import Interests from "../AboutMePage/Interests/Interests";
-import PersonalInfo from "../AboutMePage/PersonalInfo/PersonalInfo";
+import {NavLink} from "react-router-dom";
+import AboutMePage from "../../Pages/ProfilePage/AboutMePage/AboutMePage";
+import TimeLinePage from "../../Pages/ProfilePage/TimeLinePage/TimeLinePage";
 
 const {TabPane} = Tabs;
 
@@ -48,55 +48,26 @@ const Profile: React.FC = () => {
       <Col span={22}>
         <ProfileInfo isOwner={!match.params.userId} profile={profile} status={status}/>
       </Col>
-      <Col span={22} style={{backgroundColor:'white'}}>
+      <Col span={22} style={{backgroundColor:'white', marginTop: 20, marginBottom: 20, borderRadius: '30px'}} >
         <Tabs defaultActiveKey="2" centered >
-          <TabPane tab={<span> <AppleOutlined/>About</span>} key="1">
-            <Row justify={"center"} gutter={[48, 16]}>
-              <Col span={7}>
-                <AboutMe profile={profile} status={status}/>
-              </Col>
-              <Col span={10}>
-                <Interests />
-            </Col>
-              <Col span={7}>
-                <PersonalInfo />
-            </Col>
-            </Row>
-          </TabPane>
-          <TabPane tab={<span> <AppleOutlined/>TimeLine</span>} key="2">
-            Инфа
-          </TabPane>
-          <TabPane tab={<span> <AppleOutlined/>Photos</span>} key="3">
-            Инфа
-          </TabPane>
-          <TabPane tab={<span> <AppleOutlined/>Friends</span>} key="4">
-            Инфа
-          </TabPane>
-          <TabPane tab={<span> <AppleOutlined/>Groups</span>} key="5">
-            Инфа
-          </TabPane>
-          <TabPane tab={<span> <AppleOutlined/>Dialogs</span>} key="6">
-            Инфа
-          </TabPane>
-          <TabPane tab={<span> <AppleOutlined/>Chat</span>} key="7">
-            Инфа
-          </TabPane>
-          <TabPane tab={<span> <AppleOutlined/>Credits</span>} key="8">
-            Инфа
-          </TabPane>
-          <TabPane tab={<span> <AppleOutlined/>Ranks</span>} key="9">
-            Инфа
-          </TabPane>
-          <TabPane tab={<span> <AppleOutlined/>Badges</span>} key="10">
-            Инфа
-          </TabPane>
-          <TabPane tab={<span> <AppleOutlined/>Quests</span>} key="11">
-            Инфа
-          </TabPane>
+            <TabPane tab={<NavLink to='/profile/aboutMe' > <AppleOutlined/>About</NavLink>} key="1" />
+            <TabPane tab={<NavLink to='/profile' > <AppleOutlined/>TimeLine</NavLink>} key="2" />
+            <TabPane tab={<NavLink to='/profile/photos' > <AppleOutlined/>Photos</NavLink>} key="3" />
+            <TabPane tab={<NavLink to='/profile/friends' > <AppleOutlined/>Friends</NavLink>} key="4" />
+            <TabPane tab={<NavLink to='/profile/groups' > <AppleOutlined/>Groups</NavLink>} key="5" />
+            <TabPane tab={<NavLink to='/profile/dialogs' > <AppleOutlined/>Dialogs</NavLink>} key="6" />
+            <TabPane tab={<NavLink to='/profile/chat' > <AppleOutlined/>Chat</NavLink>} key="7" />
+            <TabPane tab={<NavLink to='/profile/credits' > <AppleOutlined/>Credits</NavLink>} key="8" />
+            <TabPane tab={<NavLink to='/profile/ranks' > <AppleOutlined/>Ranks</NavLink>} key="9" />
+            <TabPane tab={<NavLink to='/profile/badges' > <AppleOutlined/>Badges</NavLink>} key="10" />
+            <TabPane tab={<NavLink to='/profile/quests' > <AppleOutlined/>Quests</NavLink>} key="11" />
         </Tabs>
       </Col>
       <Col span={22}>
-        <MyPosts/>
+        <Switch >
+          <Route path="/profile/aboutMe" render={() => <AboutMePage /> }/>
+          <Route path="/profile" render={() =>  <TimeLinePage />}/>
+        </Switch>
       </Col>
     </Row>
   );
