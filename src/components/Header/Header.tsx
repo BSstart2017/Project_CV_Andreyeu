@@ -9,12 +9,15 @@ import {getLoginSelector} from "../../redux/Selectors/authSelector";
 import Logo from "../Logo/Logo";
 import {getCollapsed} from "../../redux/Selectors/appSelector";
 import {actions} from "../../redux/app-reducer";
+import {UserAvatar} from "../UserAvatar/UserAvatar";
+import {getProfileSelector} from "../../redux/Selectors/profileSelector";
 
 const {Header} = Layout;
 
 export const Headers: React.FC = () => {
 
   const login = useSelector(getLoginSelector)
+  const profile = useSelector(getProfileSelector)
   const collapsed = useSelector(getCollapsed)
   const dispatch = useDispatch()
 
@@ -39,7 +42,7 @@ export const Headers: React.FC = () => {
             <Col span={1}>
               <span className="avatar-item">
                 <Badge count={1}>
-                  <Avatar shape="square" icon={<UserOutlined/>}/>
+                  <UserAvatar avatar={profile?.photos.small} title={login} />
                 </Badge>
               </span>
             </Col>

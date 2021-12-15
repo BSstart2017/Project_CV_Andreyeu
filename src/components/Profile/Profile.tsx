@@ -1,6 +1,5 @@
 import React, {useEffect} from "react";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import MyPosts from "./MyPosts/MyPosts";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../redux/store";
 import {
@@ -13,12 +12,14 @@ import {AppleOutlined} from '@ant-design/icons';
 import {NavLink} from "react-router-dom";
 import AboutMePage from "../../Pages/ProfilePage/AboutMePage/AboutMePage";
 import TimeLinePage from "../../Pages/ProfilePage/TimeLinePage/TimeLinePage";
+import {actions} from "../../redux/users-reducer";
+import {getProfileSelector} from "../../redux/Selectors/profileSelector";
 
 const {TabPane} = Tabs;
 
 const Profile: React.FC = () => {
 
-  const profile = useSelector((state: AppStateType) => state.profileReducer.profile)
+  const profile = useSelector(getProfileSelector)
   const myId = useSelector((state: AppStateType) => state.authReducer.id)
   const status = useSelector((state: AppStateType) => state.profileReducer.status)
 
@@ -41,6 +42,10 @@ const Profile: React.FC = () => {
     }
     dispatch(getProfileUser(userId))
     dispatch(getProfileStatus(userId))
+    return () => {
+      dispatch(actions.setNullNextFriendsUsers())
+      dispatch(actions.setTotalUsers(0))
+    }
   }, [match.params.userId])
 
   return (

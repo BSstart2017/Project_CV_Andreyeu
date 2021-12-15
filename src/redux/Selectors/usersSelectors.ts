@@ -27,3 +27,7 @@ export const getIsToggleFollowSelector = (state: AppStateType) => {
 export const getFilterUsersSelector = (state: AppStateType) => {
     return state.usersReducer.filter
 }
+
+export const getFriendsUsersSelector = (state: AppStateType) => {
+    return state.usersReducer.usersFriends
+}

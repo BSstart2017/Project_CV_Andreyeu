@@ -7,6 +7,7 @@ import { UserFilterFormDataType } from "../components/Users/UserForm"
 
 let defaultState = {
   users: [] as Array<UserResponseType>,
+  usersFriends: [] as Array<UserResponseType>,
   pageCount: 10,
   totalUsers: 0,
   activePage: 1,
@@ -45,6 +46,16 @@ const usersReducer = (state = defaultState, action : ActionType) : DefaultStateT
         ...state, 
         filter: action.filter
       }
+    case "users/Aliaksandr_Andreyeu/NEXT_FRIENDS_USERS":
+      return {
+        ...state,
+        usersFriends: [...state.usersFriends, ...action.users]
+      }
+      case "users/Aliaksandr_Andreyeu/NULL_NEXT_FRIENDS_USERS":
+      return {
+        ...state,
+        usersFriends: []
+      }
     default:
       return state
   }
@@ -58,17 +69,26 @@ export const actions = {
   setActivePage: (activePage : number) => ({type : 'users/Aliaksandr_Andreyeu/ACTIVE_PAGE', activePage} as const),
   setIsPreloader: (isPreloader : boolean) => ({type : 'users/Aliaksandr_Andreyeu/IS_PRELOADER', isPreloader} as const),
   setIsToggleFollow: (isToggle: boolean, id : number) => ({type : 'users/Aliaksandr_Andreyeu/IS_TOGGLE_FOLLOW', isToggle, id} as const),
-  setFilterUsers: (filter: UserFilterFormDataType) => ({type : "users/Aliaksandr_Andreyeu/FILTERS_USERS", filter} as const)
+  setFilterUsers: (filter: UserFilterFormDataType) => ({type : "users/Aliaksandr_Andreyeu/FILTERS_USERS", filter} as const),
+  setNextFriendsUsers: (users : Array<UserResponseType>) => ({type : "users/Aliaksandr_Andreyeu/NEXT_FRIENDS_USERS", users} as const),
+  setNullNextFriendsUsers: () => ({type : "users/Aliaksandr_Andreyeu/NULL_NEXT_FRIENDS_USERS"} as const),
 }
 
 export const getUsers = (activePage : number, pageCount: number, filter: UserFilterFormDataType) : ThunkType => async (dispatch) => {
-      dispatch(actions.setIsPreloader(true))
      const response = await userAPI.getUsers(activePage, pageCount, filter)
         dispatch(actions.setFilterUsers(filter))
         dispatch(actions.setActivePage(activePage))
         dispatch(actions.setUsers(response.items))
         dispatch(actions.setTotalUsers(response.totalCount))
         dispatch(actions.setIsPreloader(false))
+}
+
+export const getFriendsUsers = (activePage : number, pageCount: number, filter: UserFilterFormDataType) : ThunkType => async (dispatch) => {
+  dispatch(actions.setIsPreloader(true))
+  const response = await userAPI.getUsers(activePage, pageCount, filter)
+  dispatch(actions.setNextFriendsUsers(response.items))
+  dispatch(actions.setTotalUsers(response.totalCount))
+  dispatch(actions.setIsPreloader(false))
 }
 
 const _toggleFollowUnfollow = async (userId: number , dispatch : Dispatch<ActionType>, 
