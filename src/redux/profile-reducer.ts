@@ -433,7 +433,7 @@ export const getNewContactsEdit = (profile: ProfileResponseDataType): ThunkType 
 export default profileReducer;
 
 
-type defaultStateType = typeof defaultState
+export type defaultStateType = typeof defaultState
 type ActionType = InferActionType<typeof actions>
 type ThunkType = BaseThunkType<ActionType | FormAction>
 

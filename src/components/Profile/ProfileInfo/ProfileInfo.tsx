@@ -1,19 +1,30 @@
-import React, {ChangeEvent, FC} from "react";
+import React, { FC} from "react";
 import ProfileStatus from "./ProfileStatus/ProfileStatus"
 import userDefaultImg from "./../../../assets/images/userDefault.jpg";
 import {ProfileResponseDataType} from "../../../api/profile-api";
 import {useDispatch} from "react-redux";
 import {getNewAvatar} from "../../../redux/profile-reducer";
-import {Badge, Col, Input, Row} from "antd";
+import {Badge, Button, Col, Row, Upload} from "antd";
 import SocialLink from "../../SocialLink/SocialLink";
-import Text from "antd/es/typography/Text";
+import {UploadOutlined} from "@ant-design/icons";
+import {UploadRequestOption} from "rc-upload/es/interface"
 
 const ProfileInfo: FC<PropsType> = ({profile, status, isOwner}) => {
 
   const dispatch = useDispatch()
 
-  const onAddNewAvatar = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files?.length) dispatch(getNewAvatar(e.target.files[0]))
+  const onAddNewAvatar = (options: UploadRequestOption<any>) => {
+    const { onSuccess, onError, file} = options;
+    try {
+      dispatch(getNewAvatar(file as File))
+      if (onSuccess) {
+        onSuccess("Ok");
+      }
+    } catch (err) {
+      // @ts-ignore
+      onError({ err });
+    }
+
   }
 
   return (
@@ -38,22 +49,22 @@ const ProfileInfo: FC<PropsType> = ({profile, status, isOwner}) => {
             <Col span={8}>
               <Row>
                 <Col span={8}>
-                  <div><Text>10</Text></div>
-                  <div><Text>Post</Text></div>
+                  <div><span>10</span></div>
+                  <div><span>Post</span></div>
                 </Col>
                 <Col span={8}>
-                  <div><Text>6</Text></div>
-                  <div><Text>Friends</Text></div>
+                  <div><span>6</span></div>
+                  <div><span>Friends</span></div>
                 </Col>
                 <Col span={8}>
-                  <div><Text>4</Text></div>
-                  <div><Text>Comments</Text></div>
+                  <div><span>4</span></div>
+                  <div><span>Comments</span></div>
                 </Col>
               </Row>
             </Col>
             <Col span={8}>
-              <div><Text>{profile.fullName}</Text></div>
-              <div><Text>{profile.contacts.facebook}</Text></div>
+              <div><span>{profile.fullName}</span></div>
+              <div><span>{profile.contacts.facebook}</span></div>
               <ProfileStatus statusText={status}/>
             </Col>
             <Col span={8}>
@@ -61,7 +72,9 @@ const ProfileInfo: FC<PropsType> = ({profile, status, isOwner}) => {
             </Col>
           </Row>
           <Col span={24}>
-            {isOwner && <div><Input type="file" onChange={onAddNewAvatar}/></div>}
+            {isOwner &&  <Upload customRequest={onAddNewAvatar} maxCount={1} listType="picture">
+                <Button icon={<UploadOutlined />}>Click to Upload</Button>
+            </Upload>}
           </Col>
         </>}
     </>

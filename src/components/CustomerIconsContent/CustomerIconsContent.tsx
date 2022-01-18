@@ -25,7 +25,7 @@ const CustomerIconsContent: FC<PropsType> = ({icons, title, next, total}) => {
         )}
       </Col>
       <Col span={24} style={{textAlign: 'center', paddingBottom: 20, paddingTop: 10}}>
-        { total ? total : 0 > icons.length && <Button onClick={next}>Show more</Button>}
+        { total ? total > icons.length && <Button onClick={next}>Show more</Button> : <></> }
       </Col>
 
     </Row>

@@ -1,8 +1,8 @@
 import React, {FC} from "react";
-import {Footer} from "antd/es/layout/layout";
 import Logo from "../Logo/Logo";
-import {Row} from "antd";
+import {Layout, Row} from "antd";
 
+const Footer = Layout.Footer
 const FooterMy : FC = () => {
   return (
     <Footer>

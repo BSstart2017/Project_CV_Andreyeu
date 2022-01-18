@@ -1,6 +1,5 @@
 import React, {FC} from "react"
 import {Col, Image, Row} from "antd";
-import Text from "antd/es/typography/Text";
 import {Property} from "csstype";
 import {ContentImgItemType} from "../../redux/startLoginPage-reducer";
 
@@ -17,21 +16,21 @@ const CustomerContent: FC<PropsType> = ({textColorHeader = 'black', textHeaderSi
             }
           <Col span={8} style={{paddingTop: 100}}>
             <div style={{paddingBottom: 20}}>
-              <Text style={{color: 'black', fontSize: 14}}>MAIN FEATURES</Text>
+              <span style={{color: 'black', fontSize: 14}}>MAIN FEATURES</span>
             </div>
             <div style={{paddingBottom: 20}}>
               <div>
-                <Text style={{color: `${textColorHeader}`, fontSize: `${textHeaderSizeCard}`, fontWeight: "bolder"}}>
-                  {elements.headerTextTop}</Text>
+                <span style={{color: `${textColorHeader}`, fontSize: `${textHeaderSizeCard}`, fontWeight: "bolder"}}>
+                  {elements.headerTextTop}</span>
               </div>
               <div>
-                <Text style={{color: `${textColorHeader}`, fontSize: `${textHeaderSizeCard}`, fontWeight: "bolder"}}>
-                  {elements.headerTextBottom}</Text>
+                <span style={{color: `${textColorHeader}`, fontSize: `${textHeaderSizeCard}`, fontWeight: "bolder"}}>
+                  {elements.headerTextBottom}</span>
               </div>
             </div>
             <div>
               <div style={{paddingBottom: 20}}>
-                <Text style={{color: `${textColorBody}`, fontSize: `${textBodySize}` }}>{elements.text}</Text>
+                <span style={{color: `${textColorBody}`, fontSize: `${textBodySize}` }}>{elements.text}</span>
               </div>
             </div>
           </Col>

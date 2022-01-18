@@ -1,7 +1,7 @@
-import React, {FC, useEffect} from "react";
+import React, {FC} from "react";
 import style from "./Users.module.css";
 import userDefaultIg from "./../../assets/images/userDefault.jpg";
-import {NavLink, useHistory} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import { UserResponseType } from "../../api/users-api";
 
 const User: FC<PropsType> = React.memo(({ user, isToggleFollow, toggleUnFollow, toggleFollow }) => {

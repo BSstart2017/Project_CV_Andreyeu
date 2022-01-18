@@ -11,7 +11,8 @@ const CustomerIcons: FC<PropsType> = ({icons, title}) => {
       <Row>
         {icons.map(elements=>
           <Col span={4} key={elements.id} >
-            <img title={elements.name} style={{width:'100%', height:'100%', borderRadius: '50%', padding:10}} src={elements.img} alt='noPhoto'/>
+            <img title={elements.name} style={{width:'100%', height:'100%', borderRadius: '50%', padding:10}}
+                 src={elements.img} alt='noPhoto'/>
           </Col>
         )}
       </Row>

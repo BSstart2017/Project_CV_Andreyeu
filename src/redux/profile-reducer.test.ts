@@ -1,5 +1,5 @@
 
-import profileReducer, { actions } from "./profile-reducer";
+import profileReducer, {actions, defaultStateType} from "./profile-reducer";
 
 let state = {
   postData: [
@@ -10,7 +10,7 @@ let state = {
   ],
   profile: null,
   status: ''
-}
+} as defaultStateType
 
 it('new post add', () => {
   let action = actions.setAddPostSuccess('testText')
@@ -19,3 +19,4 @@ it('new post add', () => {
   expect(newState.postData[0].newText).toBe('testText')
   expect(newState.postData[0].likeCount).toBe(0)
 })
+

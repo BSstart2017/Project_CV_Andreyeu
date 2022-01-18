@@ -1,7 +1,6 @@
 import React, {ChangeEvent, FC, useState} from 'react';
-import { Form, SubmitButton, ResetButton } from 'formik-antd'
+import { Form, SubmitButton, ResetButton, Input } from 'formik-antd'
 import { Formik } from 'formik'
-import Input from 'formik-antd/es/input'
 import {ProfileResponseDataType} from "../../api/profile-api";
 import {useDispatch} from "react-redux";
 import {getNewContactsEdit} from "../../redux/profile-reducer";
@@ -22,13 +21,9 @@ const InterestsForm: FC<PropsType> = ({profile , setEditAboutMe}) => {
     setEditAboutMe(false)
   }
 
-  const onSetFullName = (e:ChangeEvent<HTMLTextAreaElement>) => {
-    setSkills(e.target.value)
-  }
-
-  const onSetLookingJob = (e:CheckboxChangeEvent) => {
-    setLookingJob(!lookingJob)
-  }
+  const onSetFullName = (e:ChangeEvent<HTMLTextAreaElement>) => setSkills(e.target.value)
+  const onSetLookingJob = (e:CheckboxChangeEvent) => setLookingJob(!lookingJob)
+  
 
   return (
     <Formik initialValues={{lookingForAJob: false, lookingForAJobDescription: ''} } onSubmit={onSubmitData}>

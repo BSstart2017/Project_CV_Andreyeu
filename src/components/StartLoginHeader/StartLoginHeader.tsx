@@ -1,11 +1,11 @@
 import React, {FC} from "react";
+import {Layout} from "antd";
 import {Row} from "antd";
-import {Header} from "antd/es/layout/layout";
 import Logo from "../Logo/Logo";
 import Navigation from "../Navigation/Navigation";
 import ButtonLogin from "../ButtonLogin/ButtonLogin";
 
-
+const Header = Layout.Header
 const StartLoginHeader: FC<PropsType> = ({setOnLogin}) => {
   return (
     <Header>

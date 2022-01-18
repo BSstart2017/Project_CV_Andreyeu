@@ -3,12 +3,12 @@ import {Col, Divider, Row} from "antd";
 import {FormOutlined} from "@ant-design/icons";
 import AboutMeForm from "./AboutMeForm";
 import {useSelector} from "react-redux";
-import {AppStateType} from "../../redux/store";
+import {getProfileSelector, getProfileStatusSelector} from "../../redux/Selectors/profileSelector";
 
 const AboutMe: FC = () => {
 
-  const profile = useSelector((state: AppStateType) => state.profileReducer.profile)
-  const status = useSelector((state: AppStateType) => state.profileReducer.status)
+  const profile = useSelector(getProfileSelector)
+  const status = useSelector(getProfileStatusSelector)
 
   let [editAboutMe, setEditAboutMe] = useState<boolean>(false)
 

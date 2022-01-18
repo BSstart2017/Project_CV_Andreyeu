@@ -1,7 +1,6 @@
 import React, {ChangeEvent, FC, useState} from 'react';
-import { Form, SubmitButton, ResetButton } from 'formik-antd'
+import { Form, SubmitButton, ResetButton, Input } from 'formik-antd'
 import { Formik } from 'formik'
-import Input from 'formik-antd/es/input'
 import {ProfileResponseDataType} from "../../api/profile-api";
 import {useDispatch} from "react-redux";
 import {getAddProfileStatus, getNewContactsEdit} from "../../redux/profile-reducer";
@@ -31,7 +30,7 @@ const AboutMeForm: FC<PropsType> = ({ status,profile , setEditAboutMe}) => {
   }
 
   return (
-    <Formik initialValues={{fullName: '', aboutMe: '', status:''} }  onSubmit={onSubmitData}>
+    <Formik<FormType> initialValues={{fullName: '', aboutMe: '', status:''} }  onSubmit={onSubmitData}>
       <Form>
         <div style={{paddingBottom: 20, paddingRight: 20}}>
           <p>

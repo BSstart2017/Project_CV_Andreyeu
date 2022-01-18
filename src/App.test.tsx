@@ -1,9 +1,13 @@
-import React from 'react'
-import ReactDom from 'react-dom'
-import {AppSocialProject} from './App'
+import React from 'react';
+import {AppSocialProject} from './App';
+import '@testing-library/jest-dom';
+import {renderWithRedux} from "./utils/test/test-utils";
 
-it('renders without crashing AppSocialProject', () =>{
-  const div = document.createElement('div')
-  ReactDom.render(<AppSocialProject />, div)
-  ReactDom.unmountComponentAtNode(div)
+
+describe('App', ()=>{
+  it('AboutMe render',async ()=>{
+
+    renderWithRedux(<AppSocialProject/>);
+
+  })
 })

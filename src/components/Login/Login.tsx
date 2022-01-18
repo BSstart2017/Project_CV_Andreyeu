@@ -4,12 +4,11 @@ import {Redirect} from "react-router";
 import {getLogin} from "../../redux/auth-reducer";
 import LoginForm, {LoginFormDataType} from "./LoginForm";
 import {Col, Layout, Row} from "antd";
-import {Content} from "antd/es/layout/layout";
 import Welcome from "../Welcome/Welcome";
-import Text from "antd/es/typography/Text";
 import Logo from "../Logo/Logo";
 import {getCaptchaSelector, getIsLoginSelector} from "../../redux/Selectors/authSelector";
 
+const Content = Layout.Content
 export const Login: FC<PropsType> = ({setOnLogin}) => {
 
   const isLogin = useSelector(getIsLoginSelector)
@@ -36,7 +35,7 @@ export const Login: FC<PropsType> = ({setOnLogin}) => {
               <Logo spanNumberLogo={24} spanNumberText={24} textPosition={'center'}/>
             </Row>
             <Col>
-              <Text>Welcome!</Text>
+              <span>Welcome!</span>
             </Col>
             <div>
               <LoginForm onSubmit={onSubmit} captcha={captcha}/>

@@ -1,10 +1,10 @@
-import {Avatar, Badge, Button, Col, Row} from "antd";
+import {Badge, Button, Col, Row} from "antd";
 import React from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getLogout} from "../../redux/auth-reducer";
 import {Layout} from 'antd';
 import Text from "antd/lib/typography/Text";
-import {MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined} from '@ant-design/icons';
+import {MenuFoldOutlined, MenuUnfoldOutlined} from '@ant-design/icons';
 import {getLoginSelector} from "../../redux/Selectors/authSelector";
 import Logo from "../Logo/Logo";
 import {getCollapsed} from "../../redux/Selectors/appSelector";

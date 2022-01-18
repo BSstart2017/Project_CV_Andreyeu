@@ -1,26 +1,30 @@
 import React from "react";
-import {Form, InjectedFormProps, reduxForm} from "redux-form";
-import {createNewFieldForm, TextArea} from "../commons/FormControl/FormControl";
-import {maxLengthControl, requireMy} from "../../utils/validators/validators";
+import { Form, Input, SubmitButton } from 'formik-antd'
+import { Formik } from 'formik'
+import {actions} from "../../redux/dialogs-reducer";
+import {useDispatch} from "react-redux";
 
-const maxLength = maxLengthControl(300);
-
-const DialogsForm: React.FC<InjectedFormProps<DialogFormDataType>> = ({handleSubmit}) => {
-
+const DialogsForm: React.FC<PropsType> = ({onSubmit}) => {
+    const dispatch = useDispatch()
+    const handleSubmit = (formData: FormType) => {
+        dispatch(actions.addMessage(formData.newMessageText))
+        onSubmit(formData)
+    }
   return (
-    <Form onSubmit={handleSubmit}>
-      {createNewFieldForm<FormatDataKeysType>(TextArea, [requireMy, maxLength],
-        "Please write new message!", "newMessageText")}
-      <div>
-        <button>Send message</button>
-      </div>
+      <Formik<FormType> initialValues={{ newMessageText:''}} onSubmit={handleSubmit}>
+    <Form>
+        <Input aria-label='newMessageText' name='newMessageText' placeholder='Please write new message!' />
+        <SubmitButton>Send message</SubmitButton>
     </Form>
+      </Formik>
   );
 };
-// todo: formik + antd
-export default reduxForm<DialogFormDataType>({form: "dialogsMessages"})(DialogsForm)
+export default DialogsForm
 
-export type DialogFormDataType = {
+type PropsType = {
+    onSubmit : (values : FormType) => void
+}
+
+type FormType = {
   newMessageText: string
 }
-type FormatDataKeysType = Extract<keyof DialogFormDataType, string>

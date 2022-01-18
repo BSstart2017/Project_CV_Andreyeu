@@ -1,9 +1,7 @@
 import React, {FC} from "react";
 import imgLogoPhoto from "../../assets/images/LoandingHome/vkfooterlogo.png";
 import {Col} from "antd";
-import Text from "antd/es/typography/Text";
 import {Property} from "csstype";
-
 const Logo: FC<PropsType> = ({spanNumberLogo= 1 ,spanNumberText = 1,
                                textPosition='center', textColor='white'}) => {
 
@@ -13,7 +11,7 @@ const Logo: FC<PropsType> = ({spanNumberLogo= 1 ,spanNumberText = 1,
         <img src={imgLogoPhoto} alt="NoPhoto"/>
       </Col>
       <Col span={spanNumberText} >
-        <Text style={{textAlign: `${textPosition}`, color: `${textColor}`, fontWeight: "bolder"}}>VIKINGER</Text>
+        <span style={{textAlign: `${textPosition}`, color: `${textColor}`, fontWeight: "bolder"}}>VIKINGER</span>
       </Col>
     </>
   )
