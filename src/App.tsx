@@ -13,7 +13,7 @@ const App: FC = () => {
 
   useEffect(() => {
     dispatch(initializedApp())
-  }, [initializedApp])
+  }, [dispatch])
 
   if (!initialized) return <Preloader/>
 

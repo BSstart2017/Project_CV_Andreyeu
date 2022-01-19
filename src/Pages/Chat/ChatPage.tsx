@@ -14,8 +14,6 @@ const ChatPage: React.FC = () => {
 const Chat: React.FC = () => {
 
     const dispatch = useDispatch()
-
-
     const status = useSelector((state: AppStateType) => state.chatReducer.status)
 
     useEffect(() => {
@@ -23,7 +21,7 @@ const Chat: React.FC = () => {
         return () => {
             dispatch(stopMessagesListening())
         }
-    }, [])
+    }, [dispatch])
 
     return <div>
         {status === 'error' && <div>Some error occured. Please refresh the page</div>}
@@ -53,7 +51,7 @@ const Messages: React.FC = () => {
         if (isAutoScroll) {
             messagesAnchorRef.current?.scrollIntoView({behavior: 'smooth'})
         }
-    }, [messages])
+    }, [messages, isAutoScroll])
 
     return <div style={{height: '400px', overflowY: 'auto'}} onScroll={scrollHandler}>
         {messages.map((m:ChatMessageType) => <Message key={m.id} message={m}/>)}
@@ -64,7 +62,7 @@ const Messages: React.FC = () => {
 
 const Message: React.FC<{ message: ChatMessageAPIType }> = React.memo( ({message}) => {
     return <div>
-        <img src={message.photo} style={{width: '30px'}}/> <b>{message.userName}</b>
+        <img src={message.photo} style={{width: '30px'}} alt='noPhoto'/> <b>{message.userName}</b>
         <br/>
         {message.message}
         <hr/>

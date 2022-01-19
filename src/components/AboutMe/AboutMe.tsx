@@ -22,7 +22,7 @@ const AboutMe: FC = () => {
       <Col style={{paddingLeft: 30}} span={24}>
         {editAboutMe
           ? <>
-            <AboutMeForm status={status} profile={profile} setEditAboutMe={setEditAboutMe}/>
+            <AboutMeForm status={status} profile={profile} setEditAboutMe={setEditAboutMe} onSubmit={(values)=>{}}/>
           </>
           :<>
             <p>

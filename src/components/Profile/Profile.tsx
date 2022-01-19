@@ -2,10 +2,7 @@ import React, {useEffect} from "react";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../redux/store";
-import {
-  getProfileStatus,
-  getProfileUser
-} from "../../redux/profile-reducer";
+import {getProfileStatus, getProfileUser} from "../../redux/profile-reducer";
 import {Route, Switch, useHistory, useRouteMatch} from "react-router-dom";
 import {Col, Row, Tabs} from "antd";
 import {AppleOutlined} from '@ant-design/icons';
@@ -46,7 +43,7 @@ const Profile: React.FC = () => {
       dispatch(actions.setNullNextFriendsUsers())
       dispatch(actions.setTotalUsers(0))
     }
-  }, [match.params.userId])
+  }, [match.params.userId, dispatch, history, myId])
 
   return (
     <Row justify={"center"}>

@@ -33,7 +33,7 @@ export default CustomerCards
 
 
 type PropsType = {
-  spanNumber: number
+  spanNumber?: number
   paddingCards?: number
   justifyPosition?: "center" | "start" | "end" | "space-around" | "space-between" | undefined
   textColorCard? :  Property.Color | undefined

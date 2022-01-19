@@ -4,7 +4,6 @@ import DialogItems from "./DialogItem";
 import {renderWithRedux} from "../../../utils/test/test-utils";
 import {createMemoryHistory} from "history";
 import {Router} from "react-router-dom";
-import dialogsReducer from "../../../redux/dialogs-reducer";
 
 describe('DialogItems', () => {
     it('DialogItems render', () => {
@@ -12,7 +11,7 @@ describe('DialogItems', () => {
         renderWithRedux(
             <Router history={history}>
                 <DialogItems id={1} name={'Missio'}/>
-            </Router>, dialogsReducer);
+            </Router>);
         expect(screen.getByText('Missio')).toBeInTheDocument()
         expect(screen.getByText('Missio')).toHaveAttribute("href", "/dialogs/1")
     })

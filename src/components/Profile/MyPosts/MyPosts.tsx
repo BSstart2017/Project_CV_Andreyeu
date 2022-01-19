@@ -1,15 +1,15 @@
-import React, {FC} from "react";
-import MyPostsReduxForm, {MyPostFormDataType} from "./MyPostsForm";
-import Post from "./Post/Post";
-import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../../redux/store";
-import {actions} from "../../../redux/profile-reducer";
-import {Col, Row} from "antd";
+import React, {FC} from "react"
+import MyPostsReduxForm, {MyPostFormDataType} from "./MyPostsForm"
+import Post from "./Post/Post"
+import {useDispatch, useSelector} from "react-redux"
+import {actions} from "../../../redux/profile-reducer"
+import {Col, Row} from "antd"
+import {getPostDataSelector} from "../../../redux/Selectors/profileSelector"
 
 
 const MyPosts: FC = () => {
-//todo: selector
-  const postData = useSelector((state: AppStateType)=>state.profileReducer.postData)
+
+  const postData = useSelector(getPostDataSelector)
 
   const dispatch = useDispatch()
 

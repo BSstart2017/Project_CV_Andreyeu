@@ -1,5 +1,5 @@
 import {Col, Layout, Row} from "antd";
-import React, {FC, useEffect, useState} from "react";
+import React, {FC, useCallback, useEffect, useState} from "react";
 import {Headers} from "../../components/Header/Header";
 import {Route, Switch} from "react-router-dom";
 import Dialogs from "../../components/Dialogs/Dialogs";
@@ -19,7 +19,7 @@ export const AuthPage: FC<PropsType> = ({onLogin, setOnLogin}) => {
   let [spanSideBar, setSpanSideBar] = useState<number>(1)
   let [spanContent, setSpanContent] = useState<number>(23)
 
-  useEffect(() => {
+  const setSpan = useCallback((collapsed : boolean) => {
     if(collapsed){
       setSpanSideBar(()=>spanSideBar-1)
       setSpanContent(()=>spanContent+1)
@@ -27,7 +27,11 @@ export const AuthPage: FC<PropsType> = ({onLogin, setOnLogin}) => {
       setSpanSideBar(()=>spanSideBar+1)
       setSpanContent(()=>spanContent-1)
     }
-  }, [collapsed])
+  },[collapsed])
+
+  useEffect(() => {
+    setSpan(collapsed)
+  }, [setSpan, collapsed])
 
   return (
     <>

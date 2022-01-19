@@ -11,7 +11,7 @@ const CustomerCarousel : FC<PropsType> = ({carouselItems}) => {
           <Carousel dots={false} autoplay>
             {
               carouselItems.map(elements =>  <div key={elements.id} >
-                <div style={{display: 'flex', justifyContent: 'center'}}>
+                <div  style={{display: 'flex', justifyContent: 'center'}}>
                   <img src={elements.img} alt="noPhoto"/>
                 </div>
               </div> )

@@ -31,7 +31,7 @@ const TimeLinePage: FC  = React.memo(() => {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getFriendsUsers(nextFriendsCount,friendsCount, {term:'', friend: true}))
-  }, [nextFriendsCount])
+  }, [nextFriendsCount,dispatch, friendsCount])
 
   return (
     <Row justify={"space-between"}>

@@ -18,7 +18,9 @@ export const Login: FC<PropsType> = ({setOnLogin}) => {
 
   const onSubmit = (formData: LoginFormDataType) => {
     dispatch(getLogin(formData.email, formData.password, formData.rememberMe, formData.captcha))
-    setOnLogin(false)
+    if (setOnLogin) {
+      setOnLogin(false)
+    }
   };
 
   if (isLogin) return <Redirect to="profile/"/>
@@ -48,5 +50,5 @@ export const Login: FC<PropsType> = ({setOnLogin}) => {
 }
 
 type PropsType = {
-  setOnLogin: (onLogin:boolean) => void
+  setOnLogin?: (onLogin:boolean) => void
 }

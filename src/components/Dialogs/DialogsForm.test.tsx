@@ -6,7 +6,7 @@ import DialogsForm from "./DialogsForm";
 
 describe('DialogsForm', () => {
 
-    it('rendering and submitting a basic Formik form', async () => {
+    it('DialogsForm rendering and submitting a basic Formik form', async () => {
         const handleSubmit = jest.fn()
         renderWithRedux(<DialogsForm onSubmit={handleSubmit}/>)
 

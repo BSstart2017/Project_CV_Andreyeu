@@ -24,7 +24,7 @@ export const Users: React.FC = React.memo(() => {
   
   useEffect(() => {
     dispatch(getUsers(activePage, pageCount, filter))
-  }, [])
+  }, [activePage, dispatch, filter, pageCount])
 
   const setCurrentPage = (page: number) => {
     dispatch(getUsers(page, pageCount, filter))

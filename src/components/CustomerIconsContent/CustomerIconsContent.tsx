@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 import {Button, Col, Row} from "antd";
 import {UserResponseType} from "../../api/users-api";
-import userDefaultIg from "./../../assets/images/userDefault.jpg";
 import {UserAvatar} from "../UserAvatar/UserAvatar";
 
 const CustomerIconsContent: FC<PropsType> = ({icons, title, next, total}) => {
@@ -9,7 +8,7 @@ const CustomerIconsContent: FC<PropsType> = ({icons, title, next, total}) => {
   return (
     <Row style={{backgroundColor:'white', borderRadius: '30px', marginBottom: 20}}>
       <span style={{fontSize: 'large', fontWeight: 'bold', paddingLeft: '30px'}}>
-        {title}: {total ? total : ''}
+        {title} : {total ? total : ''}
       </span>
       <Col span={24}>
         {icons.map(elements=>
@@ -25,7 +24,7 @@ const CustomerIconsContent: FC<PropsType> = ({icons, title, next, total}) => {
         )}
       </Col>
       <Col span={24} style={{textAlign: 'center', paddingBottom: 20, paddingTop: 10}}>
-        { total ? total > icons.length && <Button onClick={next}>Show more</Button> : <></> }
+        { total ? total > icons.length && total > 10 && <Button onClick={next}>Show more</Button> : <></> }
       </Col>
 
     </Row>
