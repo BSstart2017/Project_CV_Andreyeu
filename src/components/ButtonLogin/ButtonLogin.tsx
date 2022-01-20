@@ -5,9 +5,7 @@ import {NavLink} from "react-router-dom"
 const ButtonLogin : FC<PropsType> = ({setOnLogin}) => {
 
   const onLogin = () => {
-    if (setOnLogin) {
       setOnLogin(true)
-    }
   }
 
   return (
@@ -20,5 +18,5 @@ const ButtonLogin : FC<PropsType> = ({setOnLogin}) => {
 export default ButtonLogin
 
 type PropsType={
-  setOnLogin?: (onLogin:boolean) => void
+  setOnLogin: (onLogin:boolean) => void
 }

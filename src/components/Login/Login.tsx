@@ -1,27 +1,16 @@
 import React, {FC} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {Redirect} from "react-router";
-import {getLogin} from "../../redux/auth-reducer";
-import LoginForm, {LoginFormDataType} from "./LoginForm";
+import LoginForm from "./LoginForm";
 import {Col, Layout, Row} from "antd";
 import Welcome from "../Welcome/Welcome";
 import Logo from "../Logo/Logo";
-import {getCaptchaSelector, getIsLoginSelector} from "../../redux/Selectors/authSelector";
+import {getIsLoginSelector} from "../../redux/Selectors/authSelector";
 
 const Content = Layout.Content
 export const Login: FC<PropsType> = ({setOnLogin}) => {
 
   const isLogin = useSelector(getIsLoginSelector)
-  const captcha = useSelector(getCaptchaSelector)
-
-  const dispatch = useDispatch()
-
-  const onSubmit = (formData: LoginFormDataType) => {
-    dispatch(getLogin(formData.email, formData.password, formData.rememberMe, formData.captcha))
-    if (setOnLogin) {
-      setOnLogin(false)
-    }
-  };
 
   if (isLogin) return <Redirect to="profile/"/>
 
@@ -40,7 +29,7 @@ export const Login: FC<PropsType> = ({setOnLogin}) => {
               <span>Welcome!</span>
             </Col>
             <div>
-              <LoginForm onSubmit={onSubmit} captcha={captcha}/>
+              <LoginForm onSubmit={values => {}} setOnLogin={setOnLogin}/>
             </div>
           </Col>
         </Row>
@@ -50,5 +39,5 @@ export const Login: FC<PropsType> = ({setOnLogin}) => {
 }
 
 type PropsType = {
-  setOnLogin?: (onLogin:boolean) => void
+  setOnLogin: (onLogin:boolean) => void
 }

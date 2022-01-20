@@ -1,7 +1,6 @@
 import React, { FC } from "react";
 import {Col, Menu} from "antd";
 
-
 const Navigation : FC = () => {
   return (
     <Col span={19}>

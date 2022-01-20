@@ -8,7 +8,7 @@ const CustomerContent: FC<PropsType> = ({textColorHeader = 'black', textHeaderSi
 
   return (
     <>
-      {contentImgItems.map(elements => (
+      {contentImgItems?.map(elements => (
           <Row justify={"center"} key={elements.id}>
             { elements.position === 'left' && <Col span={8} style={{display: 'flex', justifyContent: 'center'}}>
               <Image src={elements.img} alt='noPhoto'/>

@@ -10,7 +10,7 @@ const CustomerCards: FC<PropsType> = ({spanNumber = 5, paddingCards = 48, justif
   return (
     <>
       <Row justify={justifyPosition} gutter={[paddingCards, 16]} style={{margin: 0}}>
-        {cards.map(elements => (
+        {cards?.map(elements => (
           <Col span={spanNumber} key={elements.id}>
             <div style={{paddingBottom: 30}}>
               <img src={elements.img} alt='noPhoto'/>

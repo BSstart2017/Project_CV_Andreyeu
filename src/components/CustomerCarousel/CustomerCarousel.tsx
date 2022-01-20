@@ -10,7 +10,7 @@ const CustomerCarousel : FC<PropsType> = ({carouselItems}) => {
         <Col span={12} >
           <Carousel dots={false} autoplay>
             {
-              carouselItems.map(elements =>  <div key={elements.id} >
+              carouselItems?.map(elements =>  <div key={elements.id} >
                 <div  style={{display: 'flex', justifyContent: 'center'}}>
                   <img src={elements.img} alt="noPhoto"/>
                 </div>

@@ -3,12 +3,12 @@ import {Divider} from "antd";
 import {FormOutlined} from "@ant-design/icons";
 import PersonalInfoForm from "./PersonalInfoForm";
 import {useSelector} from "react-redux";
-import {AppStateType} from "../../redux/store";
 import {ProfileContactsDataType} from "../../api/profile-api";
+import {getProfileSelector} from "../../redux/Selectors/profileSelector";
 
 const PersonalInfo: FC = () => {
 
-  const profile = useSelector((state: AppStateType) => state.profileReducer.profile)
+  const profile = useSelector(getProfileSelector)
 
   let [editPersonalInfo, setEditPersonalInfo] = useState<boolean>(false)
 
@@ -23,7 +23,7 @@ const PersonalInfo: FC = () => {
       <div style={{paddingLeft: 30, paddingRight: 5}}>
         {editPersonalInfo
           ? <>
-            <PersonalInfoForm  profile={profile} setEditPersonalInfo={setEditPersonalInfo}/>
+            <PersonalInfoForm onSubmit={values => {}} profile={profile} setEditPersonalInfo={setEditPersonalInfo}/>
           </>
           : profile ? <>
             {Object.keys(profile?.contacts).map(key => {

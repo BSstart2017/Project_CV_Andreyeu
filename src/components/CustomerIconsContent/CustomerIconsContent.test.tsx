@@ -141,13 +141,14 @@ describe('CustomerIconsContent', ()=>{
         expect(screen.getByTitle(/Dima/i)).toBeInTheDocument()
         expect(screen.queryByRole('button')).toBeNull()
     })
-    it('CustomerIconsContent total > 10 and click "show more"', ()=>{
-        const next = jest.fn()
+    it('CustomerIconsContent total > 10 and click "show more"', async ()=>{
+        const next = jest.fn().mockImplementationOnce(() => friendsTwo)
         render(<CustomerIconsContent icons={friendsTen} title={'Friends'} next={next} total={12}/>)
         expect(screen.queryByRole('button')).not.toBeNull()
         expect(next).toHaveBeenCalledTimes(0)
         userEvent.click(screen.getByRole('button'))
-        expect(next).toHaveBeenCalledTimes(1)
-        //todo: expect(screen.queryByRole('button')).toBeNull()
+        expect(await next).toHaveBeenCalledTimes(1)
+        screen.debug()
+       // todo: expect(screen.queryByRole('button')).toBeNull()
     })
 })

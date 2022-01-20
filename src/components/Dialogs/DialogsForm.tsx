@@ -7,8 +7,8 @@ import {useDispatch} from "react-redux";
 const DialogsForm: React.FC<PropsType> = ({onSubmit}) => {
     const dispatch = useDispatch()
     const handleSubmit = (formData: FormType) => {
-        dispatch(actions.addMessage(formData.newMessageText))
         onSubmit(formData)
+        dispatch(actions.addMessage(formData.newMessageText))
     }
   return (
       <Formik<FormType> initialValues={{ newMessageText:''}} onSubmit={handleSubmit}>

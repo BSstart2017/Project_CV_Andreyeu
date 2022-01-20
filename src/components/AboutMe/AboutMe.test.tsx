@@ -16,7 +16,7 @@ describe('AboutMe', () => {
 
     it('AboutMe render',   () => {
         useSelectorMock.mockImplementationOnce(() => profile)
-        useSelectorMock.mockImplementationOnce(() => 'React good')
+                        .mockImplementationOnce(() => 'React good')
         renderWithRedux(<AboutMe/>)
         expect(screen.getByRole('separator')).toBeInTheDocument()
         expect(screen.getByRole("img")).toBeInTheDocument()
@@ -27,12 +27,11 @@ describe('AboutMe', () => {
     })
     it('AboutMe click Edit',   () => {
         useSelectorMock.mockImplementationOnce(() => profile)
-        useSelectorMock.mockImplementationOnce(() => 'React good')
+                        .mockImplementationOnce(() => 'React good')
         renderWithRedux(<AboutMe/>)
         userEvent.click(screen.getByRole("img"))
         expect(screen.getByLabelText(/fullName/i)).toBeInTheDocument()
         expect(screen.getByRole('button', {name: /All clear field/i})).toBeDisabled()
         expect(screen.getByRole('button', {name: /Save/i})).not.toBeDisabled()
-        screen.debug()
     })
 })

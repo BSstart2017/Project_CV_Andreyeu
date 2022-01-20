@@ -11,18 +11,18 @@ const profile = {
     lookingForAJobDescription: 'string',
     fullName: 'Missio',
     contacts: {
-        github: 'string',
-        vk: 'string',
-        facebook: 'string',
-        instagram: 'string',
-        twitter: 'string',
-        website: 'string',
-        youtube: 'string',
-        mainLink: 'string'
+        github: '',
+        vk: '',
+        facebook: '',
+        instagram: '',
+        twitter: '',
+        website: '',
+        youtube: '',
+        mainLink: ''
     },
     photos: {
-        small: 'string',
-        large: 'string'
+        small: '',
+        large: ''
     }
 }
 

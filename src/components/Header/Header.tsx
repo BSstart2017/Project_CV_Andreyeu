@@ -42,7 +42,7 @@ export const Headers: React.FC = () => {
             <Col span={1}>
               <span className="avatar-item">
                 <Badge count={1}>
-                  <UserAvatar avatar={profile?.photos.small} title={login} />
+                      <UserAvatar avatar={profile?.photos.small} title={login} />
                 </Badge>
               </span>
             </Col>

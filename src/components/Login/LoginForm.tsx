@@ -1,42 +1,49 @@
 import React from "react";
-import {Form, InjectedFormProps, reduxForm} from "redux-form";
-import {createNewFieldForm, Input} from "../commons/FormControl/FormControl";
-import {maxLengthControl, requireMy} from "../../utils/validators/validators";
+import {useDispatch, useSelector} from "react-redux";
+import {getCaptchaSelector} from "../../redux/Selectors/authSelector";
+import {getLogin} from "../../redux/auth-reducer";
+import { Form, Input, SubmitButton } from 'formik-antd'
+import { Formik } from 'formik'
 
-const maxLength40 = maxLengthControl(40)
-// todo: formik + antd
-const LoginForm: React.FC<InjectedFormProps<LoginFormDataType, OwnPropsType> & OwnPropsType> = (
-  {handleSubmit, error, captcha}) => {
+const LoginForm: React.FC<PropsType> = ({onSubmit, setOnLogin}) => {
+
+  const captcha = useSelector(getCaptchaSelector)
+
+  const dispatch = useDispatch()
+
+  const handleSubmit = (values: FormType) => {
+    onSubmit(values)
+    dispatch(getLogin(values.email, values.password, values.rememberMe, values.captcha))
+    setOnLogin(false)
+  }
   return (
-    <Form onSubmit={handleSubmit}>
-      {createNewFieldForm<FormatDataKeysType>(Input, [requireMy, maxLength40], "Email", "email")}
-      {createNewFieldForm<FormatDataKeysType>(Input, [requireMy, maxLength40], "Password", "password", {type: "password"})}
-      {createNewFieldForm<FormatDataKeysType>(Input, [], "", "rememberMe", {type: "checkbox"}, "rememberMe")}
-      {captcha && <div>
-          <div>
+      <Formik<FormType> initialValues={{email:'', captcha:'', password:'', rememberMe: false}} onSubmit={handleSubmit}>
+        <Form >
+          <Input name='email' aria-label='email' placeholder='Email' type={"email"}/>
+          <Input name='password' aria-label='password' placeholder='Password' type={"password"}/>
+          <Input name='rememberMe' aria-label='rememberMe' type={"checkbox"}/>
+          {captcha && <div>
+            <div>
               <img src={captcha} alt="noPhoto"/>
+            </div>
+            <Input name='captcha' aria-label='captcha' type={"text"}/>
+          </div>}
+          <div>
+            <SubmitButton type="primary">Login</SubmitButton>
           </div>
-        {createNewFieldForm<FormatDataKeysType>(Input, [requireMy], "Please write captcha img", "captcha")}
-      </div>}
-      {error && <div>
-        {error}
-      </div>}
-      <div>
-        <button>Login</button>
-      </div>
-    </Form>
+        </Form>
+      </Formik>
   );
 };
 
-export default reduxForm<LoginFormDataType, OwnPropsType>({form: "Login"})(LoginForm)
+export default LoginForm
 
-type OwnPropsType = {
-  captcha: string | null
+type PropsType = {
+  setOnLogin: (onLogin:boolean) => void
+  onSubmit: (values:FormType) => void
 }
 
-type FormatDataKeysType = Extract<keyof LoginFormDataType, string>
-
-export type LoginFormDataType = {
+type FormType = {
   email: string
   password: string
   rememberMe: boolean

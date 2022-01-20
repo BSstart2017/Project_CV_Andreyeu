@@ -20,7 +20,7 @@ const Interests: FC = () => {
       <div style={{paddingLeft: 30}}>
         {editAboutMe
           ? <>
-            <InterestsForm status={status} profile={profile} setEditAboutMe={setEditAboutMe}/>
+            <InterestsForm onSubmit={(value => {})} status={status} profile={profile} setEditAboutMe={setEditAboutMe}/>
           </>
           :<>
             <p>

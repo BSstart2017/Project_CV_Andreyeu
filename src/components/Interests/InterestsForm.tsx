@@ -7,13 +7,15 @@ import {getNewContactsEdit} from "../../redux/profile-reducer";
 import {Checkbox} from "antd";
 import {CheckboxChangeEvent} from "antd/es/checkbox";
 
-const InterestsForm: FC<PropsType> = ({profile , setEditAboutMe}) => {
+const InterestsForm: FC<PropsType> = ({profile , setEditAboutMe, onSubmit}) => {
 
   const dispatch = useDispatch()
   let [skills, setSkills] = useState(profile?.lookingForAJobDescription)
   let [lookingJob, setLookingJob] = useState(profile?.lookingForAJob)
 
-  const onSubmitData = (value:FormType) => {
+  const handleSubmit = (value:FormType) => {
+    onSubmit(value)
+
     if(profile) {
       dispatch(getNewContactsEdit({...profile, lookingForAJob:value.lookingForAJob,
         lookingForAJobDescription: value.lookingForAJobDescription }))
@@ -26,19 +28,19 @@ const InterestsForm: FC<PropsType> = ({profile , setEditAboutMe}) => {
   
 
   return (
-    <Formik initialValues={{lookingForAJob: false, lookingForAJobDescription: ''} } onSubmit={onSubmitData}>
+    <Formik<FormType> initialValues={{lookingForAJob: !lookingJob , lookingForAJobDescription: ''} } onSubmit={handleSubmit}>
       <Form>
         <div style={{paddingBottom: 20}}>
           <p>
             <span style={{fontSize: 'large', fontWeight: 'bold'}}>Looking for a job: </span>
-            <Checkbox checked={lookingJob} onChange={onSetLookingJob} name="lookingForAJob"/>
+            <Checkbox aria-label="lookingForAJob" checked={lookingJob} onChange={onSetLookingJob} name="lookingForAJob"/>
           </p>
         </div>
         <div style={{paddingBottom: 20, paddingRight: 20}}>
           <p>
             <span style={{fontSize: 'large', fontWeight: 'bold'}}>Skills: </span>
           </p>
-          <Input.TextArea name='lookingForAJobDescription' value={skills} onChange={onSetFullName}/>
+          <Input.TextArea aria-label="lookingForAJobDescription" name='lookingForAJobDescription' value={skills} onChange={onSetFullName}/>
         </div>
         <div style={{paddingBottom: 20}}>
           <ResetButton style={{marginRight: 20}}>All clear field</ResetButton>
@@ -62,4 +64,5 @@ type PropsType = {
   status: string
   profile: ProfileResponseDataType | null
   setEditAboutMe: (editAboutMe:boolean) => void
+  onSubmit: (value:FormType) => void
 }

@@ -15,11 +15,11 @@ const App: FC = () => {
     dispatch(initializedApp())
   }, [dispatch])
 
-  if (!initialized) return <Preloader/>
-
-  return (
-      <Route path="/" render={() => <StartLoginPage/>}/>
-  )
+  if (!initialized){
+    return <Preloader/>
+  }else{
+    return <StartLoginPage/>
+  }
 }
 
 export const AppSocialProject = () => {

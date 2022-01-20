@@ -5,22 +5,25 @@ import {ProfileContactsDataType, ProfileResponseDataType} from "../../api/profil
 import {useDispatch} from "react-redux";
 import {getNewContactsEdit} from "../../redux/profile-reducer";
 
-const PersonalInfoForm: FC<PropsType> = ({ profile , setEditPersonalInfo}) => {
+const PersonalInfoForm: FC<PropsType> = ({ profile , setEditPersonalInfo, onSubmit}) => {
 
   const dispatch = useDispatch()
-  const onSubmitData = (value:FormType) => {
+  const handleSubmit = (values:FormType) => {
+    onSubmit(values)
     if(profile) {
-      dispatch(getNewContactsEdit({...profile, contacts: value.contacts}))
+      dispatch(getNewContactsEdit({...profile, contacts: values.contacts}))
+    } else {
+      console.log('Profile === null')
     }
     setEditPersonalInfo(false)
   }
 
   return (
     <Formik initialValues={{contacts: {facebook:'', github: '', vk: '', instagram: '', twitter: '', mainLink: '', website: '',
-      youtube: ''}}} onSubmit={onSubmitData}>
-      <Form>
-        <div style={{paddingBottom: 20}}>
-          {profile ? <>
+      youtube: ''}}} onSubmit={handleSubmit}>
+      {profile ? <Form>
+           <>
+            <div style={{paddingBottom: 20}}>
           {Object.keys(profile?.contacts).map(key => <div style={{paddingRight: 20}} key={key}>
               <p>
                 <span style={{fontSize: 'large', fontWeight: 'bold'}}>{key} : </span>
@@ -29,13 +32,13 @@ const PersonalInfoForm: FC<PropsType> = ({ profile , setEditPersonalInfo}) => {
               <Input type="text" name={`contacts.${key}`} placeholder={profile?.contacts[key as keyof ProfileContactsDataType]}/>
             </div>
           )}
-        </> : <></>}
-        </div>
-        <div style={{paddingBottom: 20}}>
-          <ResetButton style={{marginRight: 20}}>All clear field</ResetButton>
-          <SubmitButton>Save</SubmitButton>
-        </div>
-      </Form>
+          </div>
+              <div style={{paddingBottom: 20}}>
+                <ResetButton style={{marginRight: 20}}>All clear field</ResetButton>
+                <SubmitButton>Save</SubmitButton>
+              </div>
+        </>
+      </Form>: <></>}
     </Formik>
   )
 }
@@ -52,4 +55,5 @@ contacts: ProfileContactsDataType
 type PropsType = {
   profile: ProfileResponseDataType | null
   setEditPersonalInfo: (editPersonalInfo:boolean) => void
+  onSubmit: (values : FormType) => void
 }

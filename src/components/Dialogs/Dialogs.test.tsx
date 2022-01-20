@@ -1,5 +1,5 @@
 import React from "react";
-import {screen} from "@testing-library/react";
+import {act, screen} from "@testing-library/react";
 import Dialogs from "./Dialogs";
 import {createMemoryHistory} from "history";
 import {Router} from "react-router-dom";
@@ -26,10 +26,10 @@ describe('Dialogs', () => {
     it('Dialogs render', () => {
         useSelectorMock.mockImplementationOnce(() => dialogData )
         useSelectorMock.mockImplementationOnce(() => messagesData )
-        renderWithRedux(
+        act(()=>{renderWithRedux(
             <Router history={history}>
                 <Dialogs/>
-            </Router>)
+            </Router>)})
         expect(screen.getByText(/Dima/i)).toBeInTheDocument()
         expect(screen.getByText(/Dima/i)).toHaveAttribute("href", "/dialogs/1")
         expect(screen.getByText(/world my name/i)).toBeInTheDocument()
@@ -40,9 +40,9 @@ describe('Dialogs', () => {
     it('Dialogs click new message',  async () => {
         useSelectorMock.mockImplementationOnce(() => dialogData )
         useSelectorMock.mockImplementationOnce(() => messagesData )
-        renderWithRedux(<Router history={history}>
+        act(()=>{renderWithRedux(<Router history={history}>
                 <Dialogs/>
-            </Router>)
+            </Router>)})
         expect(screen.queryByText(/React/i)).toBeNull()
         userEvent.type(screen.getByPlaceholderText(/Please write new message!/i), 'React' )
         userEvent.click(screen.getByRole("button"))
