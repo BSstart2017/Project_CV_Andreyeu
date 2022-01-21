@@ -24,14 +24,12 @@ const ProfileInfo: FC<PropsType> = ({profile, status, isOwner}) => {
       // @ts-ignore
       onError({ err });
     }
-
   }
 
   return (
     <>
-      {profile === null ? <></>
-        : <>
-          <Col span={24} style={{
+      {profile && <>
+        <Col span={24} style={{
             background: `url(${process.env.PUBLIC_URL}/assets/images/Members/5f6d2c93c75db-bp-cover-image.jpg)
      center center / cover no-repeat`, borderRadius: '30px 30px 0px 0px', height: '400px'
           }}>
@@ -65,18 +63,19 @@ const ProfileInfo: FC<PropsType> = ({profile, status, isOwner}) => {
             <Col span={8}>
               <div><span>{profile.fullName}</span></div>
               <div><span>{profile.contacts.facebook}</span></div>
-              <ProfileStatus statusText={status}/>
+              <ProfileStatus statusText={status} isOwner={isOwner}/>
             </Col>
             <Col span={8}>
               <SocialLink/>
             </Col>
           </Row>
           <Col span={24}>
-            {isOwner &&  <Upload customRequest={onAddNewAvatar} maxCount={1} listType="picture">
+            {isOwner &&  <Upload aria-label="uploadPicture" customRequest={onAddNewAvatar} maxCount={1} listType="picture">
                 <Button icon={<UploadOutlined />}>Click to Upload</Button>
             </Upload>}
           </Col>
-        </>}
+      </>
+        }
     </>
   )
 }

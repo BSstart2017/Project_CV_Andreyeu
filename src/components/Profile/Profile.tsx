@@ -10,23 +10,20 @@ import {NavLink} from "react-router-dom";
 import AboutMePage from "../../Pages/ProfilePage/AboutMePage/AboutMePage";
 import TimeLinePage from "../../Pages/ProfilePage/TimeLinePage/TimeLinePage";
 import {actions} from "../../redux/users-reducer";
-import {getProfileSelector} from "../../redux/Selectors/profileSelector";
+import {getProfileSelector, getProfileStatusSelector} from "../../redux/Selectors/profileSelector";
+import {getIdSelector} from "../../redux/Selectors/authSelector";
 
 const {TabPane} = Tabs;
 
 const Profile: React.FC = () => {
 
   const profile = useSelector(getProfileSelector)
-  const myId = useSelector((state: AppStateType) => state.authReducer.id)
-  const status = useSelector((state: AppStateType) => state.profileReducer.status)
+  const myId = useSelector(getIdSelector)
+  const status = useSelector(getProfileStatusSelector)
 
   const dispatch = useDispatch()
   const history = useHistory()
-  const match: {
-    params: {
-      userId: string
-    }
-  } = useRouteMatch()
+  const match:{ params: { userId: string } } = useRouteMatch()
 
   useEffect(() => {
     let userId: number | null = +match.params.userId

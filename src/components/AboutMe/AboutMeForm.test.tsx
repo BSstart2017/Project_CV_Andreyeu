@@ -21,8 +21,8 @@ const profile = {
         mainLink: ''
     },
     photos: {
-        small: '',
-        large: ''
+        small: `${process.env.PUBLIC_URL}/assets/images/LoandingHome/S01-1-1024x724.png`,
+        large: `${process.env.PUBLIC_URL}/assets/images/LoandingHome/S01-1-1024x724.png`
     }
 }
 

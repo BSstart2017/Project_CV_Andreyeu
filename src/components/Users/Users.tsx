@@ -47,7 +47,7 @@ export const Users: React.FC = React.memo(() => {
       {
       isPreloader ? <Preloader /> 
       :<><Paginator totalUsers={totalUsers} pageCount={pageCount} activePage={activePage} setCurrentPage={setCurrentPage}/>
-      <UserForm onFilterChange={onFilterChange}/>
+      <UserForm onSubmit={values => {}} onFilterChange={onFilterChange}/>
       {users.map((el:UserResponseType) => (
         <User
           user={el}

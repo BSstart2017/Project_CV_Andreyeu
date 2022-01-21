@@ -1,57 +1,59 @@
 import React, {FC} from 'react';
-import { Formik, Form, Field } from 'formik';
+import {Formik} from 'formik';
+import {Form, Input, SubmitButton, Select} from 'formik-antd'
 
 const validateForm = () => {
-  const errors = {};
-  return errors;
+    const errors = {};
+    return errors;
 }
 
-const UserForm: FC<UserFilterPropsType> = React.memo(({onFilterChange}) => {
-  const onSubmitValue = (values: formType, { setSubmitting }: {setSubmitting :  (isSubmitting: boolean) => void }) => {
-    const filter : UserFilterFormDataType ={
-      term : values.term,
-      friend : values.friend === "null" ? null : values.friend === "true" ? true : false
+const UserForm: FC<PropsType> = React.memo(({onFilterChange, onSubmit}) => {
+
+    const handleSubmit = (values: FormType, {setSubmitting}: { setSubmitting: (isSubmitting: boolean) => void }) => {
+        onSubmit(values)
+        const filter: UserFilterFormDataType = {
+            term: values.term,
+            friend: values.friend === "null" ? null : values.friend === "true" ? true : false
+        }
+        onFilterChange(filter)
+        setSubmitting(false);
     }
-    onFilterChange(filter)
-    setSubmitting(false);
-  }
-  return (
-    <div>
-        <Formik
-          initialValues={{ term: '', friend: "null" }} 
-          validate={validateForm}
-          onSubmit={onSubmitValue}
-        >
-          {({ isSubmitting }) => (
-            <Form>
-              <Field type="text" name="term" />
-              <Field name="friend" as="select">
-                <option value="null">All users</option>
-                <option value="true">Only followed</option>
-                <option value="false">Only unfolowed</option>
-              </Field>
-              <button type="submit" disabled={isSubmitting}>
-                Find
-              </button>
-            </Form>
-          )}
-        </Formik>
-      </div>
-  )
+    return (
+        <div>
+            <Formik<FormType>
+                initialValues={{term: '', friend: "null"}}
+                validate={validateForm}
+                onSubmit={handleSubmit}
+            >
+                {({isSubmitting}) => (
+                    <Form>
+                        <Input aria-label='term' type="text" name="term"/>
+                        <Select name='friend' defaultValue="friend">
+                            <Select.Option value="null">All users</Select.Option>
+                            <Select.Option value="true">Only followed</Select.Option>
+                            <Select.Option value="false">Only unfolowed</Select.Option>
+                        </Select>
+                        <SubmitButton type={"primary"} disabled={isSubmitting}>Find</SubmitButton>
+                    </Form>
+                )}
+            </Formik>
+        </div>
+    )
 })
 
 export default UserForm;
 
-type formType = {
-  term: string
-  friend: "true" | "null" | "false"
+type FormType = {
+    term: string
+    friend: "true" | "null" | "false"
 }
 
 export type UserFilterFormDataType = {
-  term: string
-  friend: null | boolean
+    term: string
+    friend: null | boolean
 }
 
-type UserFilterPropsType = {
-  onFilterChange: (filter: UserFilterFormDataType) => void
+type PropsType = {
+    onFilterChange: (filter: UserFilterFormDataType) => void
+    onSubmit: (values: FormType) => void
 }

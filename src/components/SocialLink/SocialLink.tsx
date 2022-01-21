@@ -3,7 +3,7 @@ import React, {FC} from "react";
 const SocialLink : FC = () => {
   return (
     <div>
-HEllow LinK
+        hello all link Social
     </div>
   )
 }

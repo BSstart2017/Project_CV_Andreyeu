@@ -6,7 +6,6 @@ import { UserResponseType } from "../../api/users-api";
 
 const User: FC<PropsType> = React.memo(({ user, isToggleFollow, toggleUnFollow, toggleFollow }) => {
 
-
   return (
     <div className={style.container}>
       <div className={style.leftBlock}>

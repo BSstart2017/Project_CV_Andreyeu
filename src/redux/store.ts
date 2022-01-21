@@ -6,7 +6,6 @@ import authReducer from "./auth-reducer"
 import appReducer from "./app-reducer"
 import chatReducer from "./chat-reducer"
 import thunkMiddleware, { ThunkAction } from "redux-thunk"
-import { reducer as formReducer } from 'redux-form'
 import startLoginPageReducer from "./startLoginPage-reducer";
 
 let rootReducer = combineReducers({
@@ -16,8 +15,7 @@ let rootReducer = combineReducers({
     authReducer,
     appReducer,
     chatReducer,
-    startLoginPageReducer,
-    form: formReducer
+    startLoginPageReducer
 })
 
 type RootReducerType = typeof rootReducer
