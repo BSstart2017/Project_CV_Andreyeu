@@ -82,4 +82,30 @@ describe('AboutMeForm', () => {
         expect(inputStatus).toHaveValue('')
 
     })
+    it('AboutMeForm porofile null',  async () => {
+        const handleSubmit = jest.fn()
+        const setEditAboutMe = jest.fn()
+
+        renderWithRedux(<AboutMeForm status={'I am Big'} setEditAboutMe={setEditAboutMe}
+                                     profile={null} onSubmit={handleSubmit}/>)
+
+        const inputFullName = screen.getByLabelText(/fullName/i)
+        const inputAboutMe = screen.getByLabelText(/aboutMe/i)
+        const inputStatus = screen.getByLabelText(/status/i)
+        const submitButton = screen.getByRole('button', {name: /Save/i})
+
+        userEvent.type(inputFullName, 'Aliaksandr')
+        userEvent.type(inputAboutMe, 'Super React')
+        userEvent.type(inputStatus, 'Big man')
+        userEvent.click(submitButton)
+
+        await waitFor(() =>
+            expect(handleSubmit).toHaveBeenCalledWith({
+                fullName: 'Aliaksandr',
+                aboutMe: 'Super React',
+                status: 'I am BigBig man'
+            })
+        )
+
+    })
 })

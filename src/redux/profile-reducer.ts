@@ -358,7 +358,8 @@ let defaultState = {
       ]
     }
   ] as Array<IconsBadgesType>,
-  status: ''
+  status: '',
+  newTextBody: ''
 }
 
 const profileReducer = (state = defaultState, action: ActionType): defaultStateType => {
@@ -367,9 +368,11 @@ const profileReducer = (state = defaultState, action: ActionType): defaultStateT
       let newItemPost = {
         id: 5, newText: action.newTextBody, likeCount: 0
       }
-      return {...state, postData: [newItemPost, ...state.postData]}
+      return {...state, postData: [newItemPost, ...state.postData], newTextBody: ''}
     case "profile/Aliaksandr_Andreyeu/SET_PROFILE_USER":
       return {...state, profile: action.profile}
+    case "profile/Aliaksandr_Andreyeu/SET_NEW_MESSAGE":
+      return {...state, newTextBody: action.message}
     case "profile/Aliaksandr_Andreyeu/SET_PROFILE_STATUS":
       return {...state, status: action.status}
     case "profile/Aliaksandr_Andreyeu/SET_NEW_AVATAR_SUCCESS":
@@ -392,6 +395,10 @@ export const actions = {
   setNewAvatarSuccess: (photos: ProfilePhotoType) => ({
     type: "profile/Aliaksandr_Andreyeu/SET_NEW_AVATAR_SUCCESS",
     photos
+  } as const),
+  setNewMessageSuccess: (message: string) => ({
+    type: "profile/Aliaksandr_Andreyeu/SET_NEW_MESSAGE",
+    message
   } as const)
 }
 

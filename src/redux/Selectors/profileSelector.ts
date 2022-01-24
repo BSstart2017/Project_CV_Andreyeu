@@ -5,6 +5,7 @@ export const getIconsQuestsSelector = (state: AppStateType) => state.profileRedu
 export const getProfileSelector = (state: AppStateType) => state.profileReducer.profile
 export const getProfileStatusSelector = (state: AppStateType) => state.profileReducer.status
 export const getPostDataSelector = (state: AppStateType) => state.profileReducer.postData
+export const getNewTextBodySelector = (state: AppStateType) => state.profileReducer.newTextBody
 
 
 

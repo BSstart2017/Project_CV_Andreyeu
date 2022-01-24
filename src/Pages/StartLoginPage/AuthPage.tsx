@@ -4,13 +4,13 @@ import {Headers} from "../../components/Header/Header";
 import {Route, Switch} from "react-router-dom";
 import Dialogs from "../../components/Dialogs/Dialogs";
 import Profile from "../../components/Profile/Profile";
-import ChatPage from "../Chat/ChatPage";
 import {Users} from "../../components/Users/Users";
 import {Login} from "../../components/Login/Login";
 import {SideBar} from "../../components/SideBar/SideBar";
 import {Redirect} from "react-router";
 import {useSelector} from "react-redux";
 import {getCollapsed} from "../../redux/Selectors/appSelector";
+import Chat from "../Chat/Chat";
 
 const {Content} = Layout;
 
@@ -45,7 +45,7 @@ export const AuthPage: FC<PropsType> = ({onLogin, setOnLogin}) => {
                 <Switch>
                   <Route path="/dialogs" render={() => <Dialogs/>}/>
                   <Route path="/profile/:userId?" render={() => <Profile/>}/>
-                  <Route path="/chat" render={() => <ChatPage/>}/>
+                  <Route path="/chat" render={() => <Chat/>}/>
                   <Route path="/users" render={() => <Users/>}/>
                   <Route path="/login" render={() => <Login setOnLogin={setOnLogin}/>}/>
                   <Route exact path="/" render={() => <Redirect to={'/profile'}/>}/>
