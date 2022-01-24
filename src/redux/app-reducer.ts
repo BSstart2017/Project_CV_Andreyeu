@@ -1,5 +1,5 @@
 import { getAuthUser } from "./auth-reducer"
-import {InferActionType } from "./store"
+import {BaseThunkType, InferActionType} from "./store"
 
 let defaultState = {
   initialized : false,
@@ -26,16 +26,18 @@ export const actions = {
    setToggleCollapsed: (collapsed: boolean) => ({type : 'app/Aliaksandr_Andreyeu/TOGGLE_COLLAPSED', collapsed} as const)
 }
 
-export const initializedApp = () => (dispatch:any) => {
-      let promise = dispatch(getAuthUser())
+export const initializedApp = ():ThunkType => async (dispatch) => {
+      let promise = await dispatch(getAuthUser())
 
-      Promise.all([promise]).then(()=>{
-        dispatch(actions.setInitialized())
+      await Promise.all([promise]).then(()=>{
+           dispatch(actions.setInitialized())
       }) 
 }
 
 
 export default appReducer;
 
+export type defaultStateType = typeof defaultState
 type ActionType = InferActionType<typeof actions>
 type initializeStateType =  typeof defaultState
+type ThunkType = BaseThunkType<ActionType>

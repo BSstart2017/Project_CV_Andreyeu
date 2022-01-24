@@ -52,6 +52,6 @@ export type ProfilePhotoType = {
   large: string | null
 }
 
-type PhotosType = {
+export type PhotosType = {
   photos: ProfilePhotoType
 }

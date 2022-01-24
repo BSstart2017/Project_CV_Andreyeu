@@ -11,9 +11,9 @@ const LoginForm: React.FC<PropsType> = ({onSubmit, setOnLogin}) => {
 
   const dispatch = useDispatch()
 
-  const handleSubmit = (values: FormType) => {
+  const handleSubmit = async (values: FormType) => {
     onSubmit(values)
-    dispatch(getLogin(values.email, values.password, values.rememberMe, values.captcha))
+    await dispatch(getLogin(values.email, values.password, values.rememberMe, values.captcha))
     setOnLogin(false)
   }
   return (

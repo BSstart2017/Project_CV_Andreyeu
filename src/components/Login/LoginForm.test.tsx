@@ -8,6 +8,7 @@ import * as reactRedux from "react-redux";
 const captchaUrl = {
   url:"https://social-network.samuraijs.com/HelpApp/HelpApp/Captcha?w=200\u0026h=100\u0026c=7qBx8Nl0mJGvLPkBzCBNpg%3D%3D"
 }
+
 describe('LoginForm', ()=>{
 
   const useSelectorMock = jest.spyOn(reactRedux, 'useSelector')
@@ -23,6 +24,7 @@ describe('LoginForm', ()=>{
     const inputPasswordText = screen.getByLabelText(/password/i)
     const inputRememberMeText = screen.getByLabelText(/rememberMe/i)
     const submitButton = screen.getByRole('button', {name: /Login/i})
+
     userEvent.type(inputEmailText, 'Nicepk.by@gmail.com')
     userEvent.type(inputPasswordText, 'Missio1991')
     userEvent.click(inputRememberMeText)
