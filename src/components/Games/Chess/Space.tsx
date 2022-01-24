@@ -11,8 +11,7 @@ import King from "./Piece/King";
 const Space : FC<StartChessTypes> = ({id, colorSpace, colorPiece,
                                          piece, col, row}) => {
     return (
-        <Col span={3} style={{backgroundColor: colorSpace, minHeight: '100px', minWidth: '100px'}}>
-            <img />
+        <Col span={3} style={{backgroundColor: colorSpace, minHeight: '100px', minWidth: '100px', textAlign: 'center'}}>
             {piece === 'bishop' && <Bishop colorPiece={colorPiece} />}
             {piece === 'king' && <King colorPiece={colorPiece} />}
             {piece === 'queen' && <Queen colorPiece={colorPiece} />}

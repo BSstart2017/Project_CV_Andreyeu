@@ -42,7 +42,7 @@ export const AuthPage: FC<PropsType> = ({onLogin, setOnLogin}) => {
           <Row>
               <SideBar spanNumber={spanSideBar}/>
               <Col span={spanContent} style={{padding: '0 24px 24px'}}>
-              <Content className="site-layout-background" style={{padding: 24, margin: 0, minHeight: 280}}>
+              <Content  style={{padding: 24, margin: 0}}>
                 <Switch>
                   <Route path="/dialogs" render={() => <Dialogs/>}/>
                   <Route path="/profile/:userId?" render={() => <Profile/>}/>

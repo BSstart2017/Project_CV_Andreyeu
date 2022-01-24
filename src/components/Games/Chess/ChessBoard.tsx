@@ -8,7 +8,6 @@ const ChessBoard : FC = () => {
     const startChess = useSelector(getChessSelector)
 
     return (
-        <div>
             <Row>
                 {
                     startChess.map(space => (
@@ -17,7 +16,6 @@ const ChessBoard : FC = () => {
                       ))
                 }
             </Row>
-        </div>
     )
 }
 

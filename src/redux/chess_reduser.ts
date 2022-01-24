@@ -66,15 +66,13 @@ const defaultState = {
     {id: 62, colorSpace: 'white', colorPiece: 'white', piece: 'bishop', row: 1, col: 'F'},
     {id: 63, colorSpace: 'orange', colorPiece: 'white', piece: 'knight', row: 1, col: 'G'},
     {id: 64, colorSpace: 'white', colorPiece: 'white', piece: 'rook', row: 1, col: 'H'},
-  ] as Array<StartChessTypes>,
-
-};
+  ] as Array<StartChessTypes>
+}
 
 
 const chessReduser = (state = defaultState, action : ActionTypes) : DefaultStateTypes => {
   switch (action.type) {
     case `game/Sergey_Suborov/CHANGE_CHESS`:
-
       return {
         ...state,
         startChess: [...state.startChess],
@@ -82,16 +80,13 @@ const chessReduser = (state = defaultState, action : ActionTypes) : DefaultState
     default:
       return state;
   }
-};
+}
 
 export const actions = {
   setAddPostSuccess: () => ({type: `game/Sergey_Suborov/CHANGE_CHESS`} as const),
-
 }
 
 export default chessReduser;
-
-
 
 type DefaultStateTypes = typeof defaultState
 export type StartChessTypes =  {
@@ -102,6 +97,5 @@ export type StartChessTypes =  {
   row: number,
   col: string
 }
-
 type ActionTypes = InferActionType<typeof actions>
 
