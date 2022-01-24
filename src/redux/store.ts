@@ -7,6 +7,7 @@ import appReducer from "./app-reducer"
 import chatReducer from "./chat-reducer"
 import thunkMiddleware, { ThunkAction } from "redux-thunk"
 import startLoginPageReducer from "./startLoginPage-reducer";
+import chessReduser from "./chess_reduser";
 
 let rootReducer = combineReducers({
     dialogsReducer,
@@ -15,7 +16,8 @@ let rootReducer = combineReducers({
     authReducer,
     appReducer,
     chatReducer,
-    startLoginPageReducer
+    startLoginPageReducer,
+    chessReduser
 })
 
 type RootReducerType = typeof rootReducer

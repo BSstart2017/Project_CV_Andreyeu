@@ -4,7 +4,7 @@ const authApi = {
   getAuthUser() {
     return instance
       .get<ApiResponseType<MeResponseDataType>>(`auth/me`)
-      .then((response) => response.data);
+      .then((response) => response.data)
   },
   postLogin(
     email: string,
@@ -31,11 +31,11 @@ const authApi = {
 export default authApi;
 
 
-type LoginResponseDataType = {
+export type LoginResponseDataType = {
   userId: number;
 };
 
-type MeResponseDataType = {
+export type MeResponseDataType = {
   id: number;
   email: string;
   login: string;

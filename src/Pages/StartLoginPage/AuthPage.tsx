@@ -11,6 +11,7 @@ import {Redirect} from "react-router";
 import {useSelector} from "react-redux";
 import {getCollapsed} from "../../redux/Selectors/appSelector";
 import Chat from "../Chat/Chat";
+import Games from "../../components/Games/Games";
 
 const {Content} = Layout;
 
@@ -47,6 +48,7 @@ export const AuthPage: FC<PropsType> = ({onLogin, setOnLogin}) => {
                   <Route path="/profile/:userId?" render={() => <Profile/>}/>
                   <Route path="/chat" render={() => <Chat/>}/>
                   <Route path="/users" render={() => <Users/>}/>
+                  <Route path="/games" render={() => <Games/>}/>
                   <Route path="/login" render={() => <Login setOnLogin={setOnLogin}/>}/>
                   <Route exact path="/" render={() => <Redirect to={'/profile'}/>}/>
                   <Route path="*" render={() => <div>404 non found</div>}/>
