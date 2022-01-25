@@ -26,7 +26,7 @@ const authReducer = (state = defaultState, action: ActionType) : defaultStateTyp
 }
 
 
-export const actions = {
+export const actionsAuth = {
   setAuthUserSuccess: (id: number | null, login: string | null, email: string | null, isLogin: boolean)  => 
   ({type : 'auth/Aliaksandr_Andreyeu/SET_LOGIN_USER_SUCCESS', data: {id, login, email, isLogin}} as const) ,
   setCaptchaUrlSuccess: (captcha : string) => ({type : 'auth/Aliaksandr_Andreyeu/SET_CAPTCHA_URL_SUCCESS', data: {captcha}} as const)
@@ -36,7 +36,7 @@ export const actions = {
 export const getAuthUser = () : ThunkType => async (dispatch)=> {
   const response = await authApi.getAuthUser()
     if (response.resultCode === ResultCodeEnum.Success){
-      dispatch(actions.setAuthUserSuccess(response.data.id, response.data.login, response.data.email, true))
+      dispatch(actionsAuth.setAuthUserSuccess(response.data.id, response.data.login, response.data.email, true))
     }
 }
 
@@ -55,20 +55,20 @@ export const getLogin = (email : string, password: string, rememberMe: boolean, 
 
 export const getCaptchaUrl = (): ThunkType => async (dispatch) => {
     const response = await securityApi.getCaptchaUrlApi()
-      dispatch(actions.setCaptchaUrlSuccess(response.url))
+      dispatch(actionsAuth.setCaptchaUrlSuccess(response.url))
 }
 
 export const getLogout = (): ThunkType => async (dispatch) => {
 
   const response = await authApi.deleteLogout()
     if (response.resultCode === ResultCodeEnum.Success){
-      dispatch(actions.setAuthUserSuccess(null, null, null, false))
+      dispatch(actionsAuth.setAuthUserSuccess(null, null, null, false))
     }
 }
 
 export default authReducer;
 
 
-type defaultStateType =  typeof defaultState
-type ActionType = InferActionType<typeof actions>
+export type defaultStateType =  typeof defaultState
+type ActionType = InferActionType<typeof actionsAuth>
 type ThunkType = BaseThunkType<ActionType | FormAction>

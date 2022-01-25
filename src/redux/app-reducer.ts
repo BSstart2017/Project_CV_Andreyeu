@@ -6,7 +6,7 @@ let defaultState = {
   collapsed: false
 }
 
-const appReducer = (state = defaultState, action: ActionType) : initializeStateType => {
+const appReducer = (state = defaultState, action: ActionType) : defaultStateType => {
   switch (action.type){
     case "app/Aliaksandr_Andreyeu/INITIALIZED_SUCCESS" :
       return {...state,
@@ -39,5 +39,4 @@ export default appReducer;
 
 export type defaultStateType = typeof defaultState
 type ActionType = InferActionType<typeof actions>
-type initializeStateType =  typeof defaultState
 type ThunkType = BaseThunkType<ActionType>

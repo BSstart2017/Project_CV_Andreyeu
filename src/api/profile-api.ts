@@ -20,7 +20,7 @@ const profileApi = {
     }).then(response => response.data)
   },
   putContactsEdit(profile: ProfileResponseDataType) {
-    return instance.put(`profile`, profile).then(response => response.data)
+    return instance.put<ApiResponseType>(`profile`, profile).then(response => response.data)
   }
 }
 

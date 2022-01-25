@@ -1,22 +1,32 @@
 import profileReducer, {
-  actions, defaultStateType, IconsBadgesType, PostDataType, getProfileUser,
-  getProfileStatus, getAddProfileStatus, getNewAvatar, getNewContactsEdit
+  actions,
+  defaultStateType,
+  getAddProfileStatus,
+  getNewAvatar,
+  getNewContactsEdit,
+  getProfileStatus,
+  getProfileUser,
+  IconsBadgesType,
+  PostDataType
 } from "./profile-reducer";
 import profileApi, {PhotosType, ProfileResponseDataType} from "../api/profile-api";
 import {ApiResponseType, ResultCodeEnum} from "../api/api";
 import {stopSubmit} from "redux-form";
 
 jest.mock('../api/profile-api')
+
 const profileApiMock = profileApi as jest.Mocked<typeof profileApi>;
 
-const dispatchMock = jest.fn();
+const dispatchMock = jest.fn()
 const getStateMock = jest.fn()
 
-const authReducer = {
-  id : 5
-}
 const resultProfileStatusSuccess: ApiResponseType = {
   resultCode: ResultCodeEnum.Success,
+  messages: [],
+  data: {}
+}
+const resultProfileStatusError: ApiResponseType = {
+  resultCode: ResultCodeEnum.Error,
   messages: [],
   data: {}
 }
@@ -30,17 +40,7 @@ const resultNewAvatarSuccess: ApiResponseType<PhotosType> = {
     }
   }
 }
-const resultNewContactsEdit: ApiResponseType<PhotosType> = {
-  resultCode: ResultCodeEnum.Success,
-  messages: [],
-  data: {
-    photos: {
-      large: "https://social-network.samuraijs.com/HelpApp/HelpApp/Captcha?w=200\u0026h=100\u0026c=7qBx8Nl0mJGvLPkBzCBNpg%3D%3D",
-      small: "https://social-network.samuraijs.com/HelpApp/HelpApp/Captcha?w=200\u0026h=100\u0026c=7qBx8Nl0mJGvLPkBzCBNpg%3D%3D"
-    }
-  }
-}
-const resultErrorNewContactsEdit: ApiResponseType<PhotosType> = {
+const resultNewAvatarError: ApiResponseType<PhotosType> = {
   resultCode: ResultCodeEnum.Error,
   messages: [],
   data: {
@@ -49,6 +49,16 @@ const resultErrorNewContactsEdit: ApiResponseType<PhotosType> = {
       small: "https://social-network.samuraijs.com/HelpApp/HelpApp/Captcha?w=200\u0026h=100\u0026c=7qBx8Nl0mJGvLPkBzCBNpg%3D%3D"
     }
   }
+}
+const resultNewContactsEdit: ApiResponseType = {
+  resultCode: ResultCodeEnum.Success,
+  messages: [],
+  data: {}
+}
+const resultNewContactsEditError: ApiResponseType = {
+  resultCode: ResultCodeEnum.Error,
+  messages: ['Error'],
+  data: {}
 }
 const resultProfileUser: ProfileResponseDataType = {
     userId: 1,
@@ -486,89 +496,102 @@ describe('profileReducer actions',()=>{
 })
 describe ('profileReducer thunk', ()=>{
   it('profileReducer getProfileUser', async () =>{
-    try {
       profileApiMock.getProfileUser.mockReturnValue(Promise.resolve(resultProfileUser))
       const thunk = getProfileUser(1)
       await thunk(dispatchMock, getStateMock, {})
       expect(dispatchMock).toBeCalledTimes(1)
       expect(dispatchMock).toHaveBeenNthCalledWith(1, actions.setProfileUserSuccess(resultProfileUser))
-    } catch (e) {
-      // eslint-disable-next-line jest/no-conditional-expect
-      expect(e).toEqual({
-        error: 'User with 1 not found.',
-      });
-    }
   })
-  it('profileReducer getProfileUserStatus', async () =>{
-    try {
+  it('profileReducer getProfileStatus', async () =>{
       profileApiMock.getProfileUserStatus.mockReturnValue(Promise.resolve('StatusTest'))
       const thunk = getProfileStatus(1)
       await thunk(dispatchMock, getStateMock, {})
       expect(dispatchMock).toBeCalledTimes(1)
       expect(dispatchMock).toHaveBeenNthCalledWith(1, actions.setProfileStatusSuccess('StatusTest'))
-    } catch (e) {
-      // eslint-disable-next-line jest/no-conditional-expect
-      expect(e).toEqual({
-        error: 'User with 1 not found.',
-      });
-    }
   })
-  it('profileReducer getAddProfileStatus', async () =>{
-    try {
+  describe('profileReducer getAddProfileStatus', ()=>{
+    const thunk = getAddProfileStatus('StatusTest')
+    it('profileReducer getAddProfileStatus success', async () =>{
       profileApiMock.putProfileStatus.mockReturnValue(Promise.resolve(resultProfileStatusSuccess))
-      const thunk = getAddProfileStatus('StatusTest')
       await thunk(dispatchMock, getStateMock, {})
       expect(dispatchMock).toBeCalledTimes(1)
       expect(dispatchMock).toHaveBeenNthCalledWith(1, actions.setProfileStatusSuccess('StatusTest'))
-    } catch (e) {
-      // eslint-disable-next-line jest/no-conditional-expect
-      expect(e).toEqual({
-        error: 'User with 1 not found.',
-      });
-    }
+    })
+    it('profileReducer getAddProfileStatus error', async () =>{
+      profileApiMock.putProfileStatus.mockReturnValue(Promise.resolve(resultProfileStatusError))
+      await thunk(dispatchMock, getStateMock, {})
+      expect(dispatchMock).toBeCalledTimes(0)
+    })
   })
-  it('profileReducer getNewAvatar', async () =>{
-    try {
+  describe('profileReducer getNewAvatar',()=>{
+    const thunk = getNewAvatar(file)
+    it('profileReducer getNewAvatar success', async () =>{
       profileApiMock.putUserAvatar.mockReturnValue(Promise.resolve(resultNewAvatarSuccess))
-      const thunk = getNewAvatar(file)
       await thunk(dispatchMock, getStateMock, {})
       expect(dispatchMock).toBeCalledTimes(1)
       expect(dispatchMock).toHaveBeenNthCalledWith(1, actions.setNewAvatarSuccess(resultNewAvatarSuccess.data.photos))
-    } catch (e) {
-      // eslint-disable-next-line jest/no-conditional-expect
-      expect(e).toEqual({
-        error: 'User with 1 not found.',
-      });
-    }
+    })
+    it('profileReducer getNewAvatar error', async () =>{
+      profileApiMock.putUserAvatar.mockReturnValue(Promise.resolve(resultNewAvatarError))
+      await thunk(dispatchMock, getStateMock, {})
+      expect(dispatchMock).toBeCalledTimes(0)
+    })
   })
-  it('profileReducer getNewContactsEdit responseCode === 0', async () =>{
-    try {
+  describe('profileReducer',()=>{
+    const thunkProfileUser = getProfileUser(1)
+    const thunk = getNewContactsEdit(profile)
+    it('profileReducer getNewContactsEdit success + userID === null', async () =>{
       profileApiMock.putContactsEdit.mockReturnValue(Promise.resolve(resultNewContactsEdit))
-      const thunk = getNewContactsEdit(profile)
-      getStateMock.mockReturnValueOnce(authReducer.id)
-      await thunk(dispatchMock, getStateMock.mockImplementationOnce(()=>(authReducer)), {})
+      profileApiMock.getProfileUser.mockReturnValue(Promise.resolve(resultProfileUser))
+      const stored = {
+        "authReducer": {
+          "id": null,
+          "login": null,
+          "email": null,
+          "isLogin": false,
+          "captcha": null
+        }
+      }
+      await thunk(dispatchMock, getStateMock.mockReturnValue(stored), {})
+      await thunkProfileUser(dispatchMock, getStateMock.mockReturnValue(stored), {})
       expect(dispatchMock).toBeCalledTimes(1)
       expect(getStateMock).toBeCalledTimes(1)
-      expect(getStateMock).toHaveBeenNthCalledWith(1, authReducer)
-      expect(dispatchMock).toHaveBeenNthCalledWith(1, getProfileUser(1))
-    } catch (e) {
-      // eslint-disable-next-line jest/no-conditional-expect
-     //   expect(e).toBe({});
-    }
-  })
-  it('profileReducer getNewContactsEdit responseCode === 1', async () =>{
-    try {
-      const response = profileApiMock.putContactsEdit.mockReturnValue(Promise.resolve(resultErrorNewContactsEdit))
-      const thunk = getNewContactsEdit(profile)
-      await thunk(dispatchMock, getStateMock, {})
-      expect(response).toBe(resultErrorNewContactsEdit)
+      expect(dispatchMock).toHaveBeenNthCalledWith(1, actions.setProfileUserSuccess(resultProfileUser))
+    })
+    it('profileReducer getNewContactsEdit error', async () =>{
+      const stored = {
+        "authReducer": {
+          "id": 1,
+          "login": null,
+          "email": null,
+          "isLogin": false,
+          "captcha": null
+        }
+      }
+      profileApiMock.putContactsEdit.mockReturnValue(Promise.resolve(resultNewContactsEditError))
+      await thunk(dispatchMock, getStateMock.mockReturnValue(stored), {})
+      expect(dispatchMock).toBeCalledTimes(1)
+      expect(getStateMock).toBeCalledTimes(1)
+      expect(dispatchMock).toHaveBeenNthCalledWith(1, stopSubmit("profileContacts", {_error: 'Error'}))
+    })
+    it('profileReducer getNewContactsEdit success + userID === 1', async () =>{
+      const stored = {
+        "authReducer": {
+          "id": 1,
+          "login": null,
+          "email": null,
+          "isLogin": false,
+          "captcha": null
+        }
+      }
+      profileApiMock.putContactsEdit.mockReturnValue(Promise.resolve(resultNewContactsEdit))
+      await thunk(dispatchMock, getStateMock.mockReturnValue(stored), {})
+      profileApiMock.getProfileUser.mockReturnValue(Promise.resolve(resultProfileUser))
+      await thunkProfileUser(dispatchMock, getStateMock, {})
       expect(dispatchMock).toBeCalledTimes(2)
       expect(getStateMock).toBeCalledTimes(1)
-      expect(dispatchMock).toHaveBeenNthCalledWith(1, stopSubmit("profileContacts", {_error: response.messages[0]}))
-    } catch (e) {
-      // eslint-disable-next-line jest/no-conditional-expect
-      //   expect(e).toBe({});
-    }
+      expect(dispatchMock).toHaveBeenNthCalledWith(2, actions.setProfileUserSuccess(resultProfileUser))
+    })
   })
 })
 

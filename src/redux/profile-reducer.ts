@@ -429,11 +429,12 @@ export const getNewAvatar = (photos: File): ThunkType => async (dispatch) => {
 export const getNewContactsEdit = (profile: ProfileResponseDataType): ThunkType => async (dispatch, getState) => {
   const userId = getState().authReducer.id
   const response = await profileApi.putContactsEdit(profile)
-  if (response.resultCode === 0) {
-    if (userId) await dispatch(getProfileUser(userId))
+  if (response.resultCode === ResultCodeEnum.Success) {
+    if (userId){
+      await dispatch(getProfileUser(userId))
+    }
   } else {
     dispatch(stopSubmit("profileContacts", {_error: response.messages[0]}))
-    return Promise.reject()
   }
 }
 

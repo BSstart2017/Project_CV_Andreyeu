@@ -1,6 +1,11 @@
-import {InferActionType} from "./store"
+import startLoginPageReducer, {
+  actions, CardType,
+  CarouselItemType,
+  ContentImgItemType,
+  DefaultStateType
+} from "./startLoginPage-reducer";
 
-let defaultState = {
+let state = {
   cardsInfo: [
     {
       id: 1,
@@ -67,64 +72,39 @@ let defaultState = {
     the private groups requests!`, position: 'left'
     }
   ]
+} as DefaultStateType
+const newItems : CarouselItemType = {id: 5 , img : `${process.env.PUBLIC_URL}/assets/images/LoandingHome/S01-1-1024x724.png`}
+const newCard:CardType = {
+      id: 4,
+      img: `${process.env.PUBLIC_URL}/assets/images/LoandingHome/01-1.png`,
+      headerText: 'BuddyPress Powered',
+      footerText: 'We took advantage and expanded the Buddypress plugin with reactions, shares, media, and much more!'
+    }
+const newItemsImg: ContentImgItemType =  {
+  id: 5, img: `${process.env.PUBLIC_URL}/assets/images/LoandingHome/F01-1.png`, headerTextTop: 'Incredible Community',
+  headerTextBottom: 'Pages and Features!',
+  text: `Powered by BuddyPress, the theme has super complete profile pages with a sleek design, info boxes to
+      show things like your gamification earnings or friends, and a slider for easier access. You’ll also find other
+      community pages, like newsfeed, members and groups directory and more!. You can also create public and private groups in order
+      to find people that share your same interests! We also created an account hub so you can easily manage lots of stuff, 
+      like groups creation, groups management, avatar and cover upload, main profile info, email settings and much more!`,
+  position: 'right'
 }
 
-const startLoginPageReducer = (state = defaultState, action: ActionType): DefaultStateType => {
-  switch (action.type) {
-    case "startLoginPageReducer/Aliaksandr_Andreyeu/SET_CARD" :
-      return {
-        ...state,
-        cardsInfo: [...state.cardsInfo, action.newCard]
-      }
-    case "startLoginPageReducer/Aliaksandr_Andreyeu/SET_CAROUSEL_ITEM" :
-      return {
-        ...state,
-        carouselItems: [...state.carouselItems, action.newItem]
-      }
-    case "startLoginPageReducer/Aliaksandr_Andreyeu/SET_CONTENT_IMG_ITEM" :
-      return {
-        ...state,
-        contentImgItems: [...state.contentImgItems, action.newItem]
-      }
-    default:
-      return state
-  }
-}
-
-export const actions = {
-  setNewCard: (newCard: CardType) => ({type: 'startLoginPageReducer/Aliaksandr_Andreyeu/SET_CARD', newCard} as const),
-  setNewCarouselItems: (newItem: CarouselItemType) => ({
-    type: 'startLoginPageReducer/Aliaksandr_Andreyeu/SET_CAROUSEL_ITEM',
-    newItem
-  } as const),
-  setNewContentImgItems: (newItem: ContentImgItemType) => ({
-    type: 'startLoginPageReducer/Aliaksandr_Andreyeu/SET_CONTENT_IMG_ITEM',
-    newItem
-  } as const)
-}
-
-
-export default startLoginPageReducer;
-
-type ActionType = InferActionType<typeof actions>
-export type DefaultStateType = typeof defaultState
-export type CardType = {
-  id: number
-  img: string
-  headerText: string
-  footerText: string
-}
-
-export type CarouselItemType = {
-  id: number
-  img: string
-}
-
-export type ContentImgItemType = {
-  id: number
-  img: string
-  headerTextTop: string
-  headerTextBottom: string
-  text: string
-  position: string
-}
+describe('startLoginPageReducer actions',()=>{
+  it('startLoginPageReducer actions.setNewCarouselItems', () => {
+    let action = actions.setNewCarouselItems(newItems)
+    let newState = startLoginPageReducer(state,action)
+    expect(newState.carouselItems.length).toBe(5)
+  })
+  it('startLoginPageReducer actions.setNewCard', () => {
+    let action = actions.setNewCard(newCard)
+    let newState = startLoginPageReducer(state,action)
+    expect(newState.cardsInfo.length).toBe(4)
+  })
+  it('startLoginPageReducer actions.setNewContentImgItems', () => {
+    let action = actions.setNewContentImgItems(newItemsImg)
+    let newState = startLoginPageReducer(state,action)
+    expect(newState.contentImgItems.length).toBe(5)
+  })
+})

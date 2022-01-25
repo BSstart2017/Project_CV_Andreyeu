@@ -39,7 +39,7 @@ export default dialogsReducer;
 
 
 
-type defaultStateType = typeof defaultState
+export type defaultStateType = typeof defaultState
 type ActionType = InferActionType<typeof actions>
 
 export type DialogDataType = { 

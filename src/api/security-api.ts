@@ -9,6 +9,6 @@ const securityApi = {
 export default securityApi
 
 
-type CaptchaResponseType = {
+export type CaptchaResponseType = {
   url: string
 }
