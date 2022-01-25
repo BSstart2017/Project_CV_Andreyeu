@@ -1,9 +1,9 @@
-import appReducer, {actions, defaultStateType, initializedApp} from "./app-reducer";
-import authApi, {MeResponseDataType} from "../api/auth-api";
-import {ApiResponseType, ResultCodeEnum} from "../api/api";
-import {getAuthUser} from "./auth-reducer";
+import appReducer, {actions, defaultStateType, initializedApp} from "../app-reducer";
+import authApi, {MeResponseDataType} from "../../api/auth-api";
+import {ApiResponseType, ResultCodeEnum} from "../../api/api";
+import {getAuthUser} from "../auth-reducer";
 
-jest.mock('../api/auth-api')
+jest.mock('../../api/auth-api')
 const authApiMock = authApi as jest.Mocked<typeof authApi>;
 
 const dispatchMock = jest.fn();

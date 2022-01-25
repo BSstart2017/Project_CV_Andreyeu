@@ -1,11 +1,11 @@
-import authApi, {LoginResponseDataType, MeResponseDataType} from "../api/auth-api";
-import {ApiResponseType, ResultCodeCaptchaEnum, ResultCodeEnum} from "../api/api";
-import authReducer, {actionsAuth, defaultStateType, getAuthUser, getCaptchaUrl, getLogin, getLogout} from "./auth-reducer";
-import securityApi, {CaptchaResponseType} from "../api/security-api";
+import authApi, {LoginResponseDataType, MeResponseDataType} from "../../api/auth-api";
+import {ApiResponseType, ResultCodeCaptchaEnum, ResultCodeEnum} from "../../api/api";
+import authReducer, {actionsAuth, defaultStateType, getAuthUser, getCaptchaUrl, getLogin, getLogout} from "../auth-reducer";
+import securityApi, {CaptchaResponseType} from "../../api/security-api";
 import {stopSubmit} from "redux-form";
 
-jest.mock('../api/auth-api')
-jest.mock('../api/security-api')
+jest.mock('../../api/auth-api')
+jest.mock('../../api/security-api')
 const authApiMock = authApi as jest.Mocked<typeof authApi>;
 const securityApiMock = securityApi as jest.Mocked<typeof securityApi>;
 

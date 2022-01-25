@@ -3,7 +3,7 @@ import startLoginPageReducer, {
   CarouselItemType,
   ContentImgItemType,
   DefaultStateType
-} from "./startLoginPage-reducer";
+} from "../startLoginPage-reducer";
 
 let state = {
   cardsInfo: [

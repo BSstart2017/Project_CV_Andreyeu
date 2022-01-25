@@ -8,12 +8,12 @@ import profileReducer, {
   getProfileUser,
   IconsBadgesType,
   PostDataType
-} from "./profile-reducer";
-import profileApi, {PhotosType, ProfileResponseDataType} from "../api/profile-api";
-import {ApiResponseType, ResultCodeEnum} from "../api/api";
+} from "../profile-reducer";
+import profileApi, {PhotosType, ProfileResponseDataType} from "../../api/profile-api";
+import {ApiResponseType, ResultCodeEnum} from "../../api/api";
 import {stopSubmit} from "redux-form";
 
-jest.mock('../api/profile-api')
+jest.mock('../../api/profile-api')
 
 const profileApiMock = profileApi as jest.Mocked<typeof profileApi>;
 

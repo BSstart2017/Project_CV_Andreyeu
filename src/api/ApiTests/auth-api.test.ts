@@ -1,7 +1,7 @@
-import authApi, {LoginResponseDataType, MeResponseDataType, } from './auth-api'
-import {ApiResponseType, ResultCodeCaptchaEnum, ResultCodeEnum} from "./api"
+import authApi, {LoginResponseDataType, MeResponseDataType, } from '../auth-api'
+import {ApiResponseType, ResultCodeCaptchaEnum, ResultCodeEnum} from "../api"
 
-jest.mock('./auth-api')
+jest.mock('../auth-api')
 const authApiMock = authApi as jest.Mocked<typeof authApi>
 
 const getAuthUsersResult:ApiResponseType<MeResponseDataType>  = {

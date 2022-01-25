@@ -1,4 +1,4 @@
-import dialogsReducer, {actions, defaultStateType, DialogDataType, MessageDataType} from "./dialogs-reducer";
+import dialogsReducer, {actions, defaultStateType, DialogDataType, MessageDataType} from "../dialogs-reducer";
 
 let state =  {
     dialogData: [
