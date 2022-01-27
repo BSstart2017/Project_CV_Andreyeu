@@ -11,7 +11,7 @@ let initialState = {
     status: 'pending' as StatusType
 }
 
-const chatReducer = (state = initialState, action: ActionsType): InitialStateType => {
+const chatReducer = (state = initialState, action: ActionsType): DefaultStateType => {
     switch (action.type) {
         case 'SN/chat/MESSAGES_RECEVIED':
             return {
@@ -39,7 +39,7 @@ export const actions = {
 }
 
 let _newMessageHandler: ((messages: ChatMessageAPIType[]) => void) | null = null
-const newMessageHandlerCreator = (dispatch: Dispatch) => {
+export const newMessageHandlerCreator = (dispatch: Dispatch) => {
     if (_newMessageHandler === null) {
         _newMessageHandler = (messages) => {
             dispatch(actions.messagesReceived(messages))
@@ -49,7 +49,7 @@ const newMessageHandlerCreator = (dispatch: Dispatch) => {
 }
 
 let _statusChangedHandler: ((status: StatusType) => void) | null = null
-const statusChangedHandlerCreator = (dispatch: Dispatch) => {
+export const statusChangedHandlerCreator = (dispatch: Dispatch) => {
     if (_statusChangedHandler === null) {
         _statusChangedHandler = (status) => {
             dispatch(actions.statusChanged(status))
@@ -77,6 +77,6 @@ export const sendMessage = (message: string): ThunkType => async (dispatch: Disp
 
 export default chatReducer
 
-export type InitialStateType = typeof initialState;
+export type DefaultStateType = typeof initialState;
 type ActionsType = InferActionType<typeof actions>
 type ThunkType = BaseThunkType<ActionsType | FormAction>

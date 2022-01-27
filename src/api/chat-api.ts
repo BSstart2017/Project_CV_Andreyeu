@@ -77,5 +77,5 @@ export type ChatMessageAPIType = {
   userId: number
   userName: string
 }
-type EventsNamesType = 'messages-received' | 'status-changed'
+export type EventsNamesType = 'messages-received' | 'status-changed'
 export type StatusType = 'pending' | 'ready' | 'error'

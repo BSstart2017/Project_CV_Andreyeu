@@ -20,17 +20,9 @@ const userAPI = {
 
 export default userAPI
 
-type UsersResponseDataType = {
+export type UsersResponseDataType = {
   items: Array<UserResponseType>
   Items: UserResponseType
-  id: number
-  name: string
-  status: string
-  photos: {
-    small: string
-    large: string
-  }
-  followed: boolean
   totalCount: number
   error: string
 }
@@ -38,7 +30,7 @@ type UsersResponseDataType = {
 export type UserResponseType = {
   id: number
   name: string
-  status: string
+  status: string | null
   photos: ProfilePhotoType
-  followed: boolean
+  followed: boolean | null
 }
