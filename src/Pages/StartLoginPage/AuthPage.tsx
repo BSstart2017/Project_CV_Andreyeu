@@ -28,11 +28,11 @@ export const AuthPage: FC<PropsType> = ({onLogin, setOnLogin}) => {
       setSpanSideBar(()=>spanSideBar+1)
       setSpanContent(()=>spanContent-1)
     }
-  },[collapsed])
+  },[spanContent, spanSideBar])
 
   useEffect(() => {
     setSpan(collapsed)
-  }, [setSpan, collapsed])
+  }, [ collapsed])
 
   return (
     <>

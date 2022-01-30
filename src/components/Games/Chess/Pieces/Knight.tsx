@@ -8,9 +8,10 @@ const knightStyle: CSSProperties = {
     cursor: 'move',
 }
 
-const Knight: FC<PropsType> = ({colorPiece}) => {
+const Knight: FC<PropsType> = ({colorPiece,x,y}) => {
     const [{ isDragging }, drag, preview] = useDrag(() => ({
             type: ItemTypes.KNIGHT,
+            item:{piece: ItemTypes.KNIGHT, position:[x,y], colorPiece: colorPiece},
             collect: (monitor) => ({isDragging: !!monitor.isDragging()})
         }), [])
 
@@ -18,8 +19,9 @@ const Knight: FC<PropsType> = ({colorPiece}) => {
         <>
             <DragPreviewImage connect={preview} src='https://cdn.pixabay.com/photo/2018/05/19/12/47/chess-white-horse-3413409__340.png' />
             <div ref={drag} style={{...knightStyle, opacity: isDragging ? 0.5 : 1}}>
-                  { colorPiece === 'white' && <img style={{maxHeight: '100px', maxWidth: '100px'}} src='https://cdn.pixabay.com/photo/2018/05/19/12/47/chess-white-horse-3413409__340.png' alt='no photo'/> }
-                  { colorPiece === 'black' && <img style={{maxHeight: '100px', maxWidth: '100px'}} src='https://cdn.pixabay.com/photo/2018/05/19/12/48/chess-black-horse-3413410_1280.png' alt='no photo'/> }
+                {x}:{y}
+                  { colorPiece === 'white' && <img style={{maxHeight: '100px', maxWidth: '100px'}} src='https://cdn.pixabay.com/photo/2018/05/19/12/47/chess-white-horse-3413409__340.png' alt='noPhoto'/> }
+                  { colorPiece === 'black' && <img style={{maxHeight: '100px', maxWidth: '100px'}} src='https://cdn.pixabay.com/photo/2018/05/19/12/48/chess-black-horse-3413410_1280.png' alt='noPhoto'/> }
             </div>
         </>
     )
@@ -29,4 +31,6 @@ export default Knight
 
 type PropsType = {
     colorPiece : string
+    x: number
+    y: number
 }

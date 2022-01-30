@@ -1,16 +1,12 @@
-import React, {FC, useMemo} from 'react'
+import React, {FC} from 'react'
 import Board from './Board'
-import {MovesKnight} from './PosibleMovesPrieces/MovesKnight'
 import {HTML5Backend} from "react-dnd-html5-backend";
 import {DndProvider} from "react-dnd";
 
-
 const Chess: FC = () => {
-    const game = useMemo(() => new MovesKnight(), [])
-
     return (
         <DndProvider backend={HTML5Backend}>
-            <Board game={game}/>
+            <Board />
         </DndProvider>
     )
 }

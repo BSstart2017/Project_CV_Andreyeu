@@ -1,6 +1,6 @@
 import React, {FC, useEffect} from "react";
 import {Provider, useDispatch, useSelector} from "react-redux";
-import {BrowserRouter, Route} from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 import Preloader from "./components/commons/Preloader/Preloader";
 import {initializedApp} from "./redux/app-reducer"
 import store from "./redux/store";

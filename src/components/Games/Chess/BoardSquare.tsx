@@ -1,24 +1,30 @@
-import {FC, ReactNode} from 'react'
+import React, {FC, ReactNode, useMemo} from 'react'
 import {useDrop} from 'react-dnd'
 import {Square} from './Square'
 import Overlay, {OverlayType} from './Overlay'
-import {MovesKnight} from './PosibleMovesPrieces/MovesKnight'
 import {ItemTypes} from "./Chess";
+import {useDispatch} from "react-redux";
+import {actions} from "../../../redux/chess_reduser";
+import {ItemPieceType} from "./Pieces/Pawn";
+import {canMovePiece} from "./PosibleMovesPrieces/CanMovesPiece";
 
+export const BoardSquare: FC<PropsType> = ({ x, y,piece,colorPiece,children}) => {
 
-export const BoardSquare: FC<PropsType> = ({x, y, children, game}: PropsType) => {
+    const canMovePieceMemo = useMemo(() => canMovePiece, [])
+    const dispatch = useDispatch()
+
+    const orange = (x + y) % 2 === 1
 
     const [{isOver, canDrop}, drop] = useDrop(() => ({
-            accept: ItemTypes.KNIGHT,
-            canDrop: () => game.canMoveKnight(x, y),
-            drop: () => game.moveKnight(x, y),
+            accept: [ItemTypes.KNIGHT, ItemTypes.PAWN, ItemTypes.ROOK,
+                ItemTypes.QUEEN, ItemTypes.KING, ItemTypes.BISHOP],
+            canDrop: (item) => canMovePieceMemo(x,y,item as ItemPieceType ),
+            drop: (item) => dispatch(actions.setMoveChessSuccess(item as ItemPieceType, x, y, piece, colorPiece)),
             collect: (monitor) => ({
                 isOver: !!monitor.isOver(),
                 canDrop: !!monitor.canDrop(),
             })
-        }), [game])
-
-    const orange = (x + y) % 2 === 1
+        }), [])
 
     return (
         <div ref={drop}>
@@ -34,5 +40,6 @@ export type PropsType = {
     x: number
     y: number
     children?: ReactNode
-    game: MovesKnight
+    colorPiece: string
+    piece: string
 }

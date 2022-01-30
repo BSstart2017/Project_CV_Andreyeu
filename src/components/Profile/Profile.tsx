@@ -1,7 +1,6 @@
 import React, {useEffect} from "react";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../redux/store";
 import {getProfileStatus, getProfileUser} from "../../redux/profile-reducer";
 import {Route, Switch, useHistory, useRouteMatch} from "react-router-dom";
 import {Col, Row, Tabs} from "antd";
