@@ -21,7 +21,7 @@ const Board: FC = () => {
                                     <Piece x={x} y={y} isPawn={space.piece === 'pawn'} colorPiece={space.colorPiece}
                                            isQueen={space.piece === 'queen'} isBishop={space.piece === 'bishop'}
                                            isKing={space.piece === 'king'} isRook={space.piece === 'rook'}
-                                           isKnight={space.piece === 'knight'}/>
+                                           isKnight={space.piece === 'knight'} piece = {space.piece}/>
                                 </BoardSquare>
                             </Col>
                         )

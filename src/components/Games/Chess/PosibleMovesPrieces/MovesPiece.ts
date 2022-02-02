@@ -4,10 +4,13 @@ import {ItemPieceType} from "../Pieces/Pawn";
 export const movesPiece = (startChess: Array<StartChessTypes>, itemDrag: ItemPieceType, itemDrop: ItemPieceType): Array<StartChessTypes> => {
         return startChess.map(space => {
             if (space.position[0] === itemDrop.position[0] && space.position[1] === itemDrop.position[1]) {
+                itemDrag.colorPiece === itemDrop.colorPiece
+                    ? alert('You can\'t beat your pieces')  :
                 space.piece = itemDrag.piece
                 space.colorPiece = itemDrag.colorPiece
                 return space
-            }else if (space.position[0] === itemDrag.position[0] && space.position[1] === itemDrag.position[1]) {
+            }else if (space.position[0] === itemDrag.position[0] && space.position[1] === itemDrag.position[1]
+                && itemDrag.colorPiece !== itemDrop.colorPiece) {
                 space.piece = ''
                 space.colorPiece = ''
                 return space

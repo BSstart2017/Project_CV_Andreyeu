@@ -7,15 +7,15 @@ import Rook from "./Pieces/Rook";
 import Pawn from "./Pieces/Pawn";
 
 export const Piece: FC<PropsType> = ({x,y, isKnight, isBishop, isKing, isQueen,
-                                         isRook, isPawn, colorPiece}) => {
+                                         isRook, isPawn, colorPiece, piece}) => {
     return (
         <>
-            {isBishop && <Bishop x={x} y={y} colorPiece={colorPiece}/>}
-            {isKing && <King x={x} y={y} colorPiece={colorPiece}/>}
-            {isQueen && <Queen x={x} y={y} colorPiece={colorPiece}/>}
-            {isRook &&<Rook x={x} y={y} colorPiece={colorPiece}/>}
-            {isPawn && <Pawn x={x} y={y} colorPiece={colorPiece}/>}
-            {isKnight && <Knight x={x} y={y} colorPiece={colorPiece}/>}
+            {isBishop && <Bishop x={x} y={y} colorPiece={colorPiece} piece={piece}/>}
+            {isKing && <King x={x} y={y} colorPiece={colorPiece}  piece={piece}/>}
+            {isQueen && <Queen x={x} y={y} colorPiece={colorPiece}  piece={piece}/>}
+            {isRook &&<Rook x={x} y={y} colorPiece={colorPiece}  piece={piece}/>}
+            {isPawn && <Pawn x={x} y={y} colorPiece={colorPiece} piece={piece}/>}
+            {isKnight && <Knight x={x} y={y} colorPiece={colorPiece} piece={piece}/>}
         </>
     )
 }
@@ -30,6 +30,7 @@ export type PropsType = {
     isPawn: boolean
     x: number
     y: number
+    piece: string
 }
 
 
